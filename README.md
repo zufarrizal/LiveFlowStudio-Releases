@@ -8,6 +8,8 @@ Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
+Versi 1.1.5 juga memperbarui backup konfigurasi: Setup, preset aktif, Action, Event, Timer, Screen, Goal, Overlay Gallery, dan Event List Box dapat dipindahkan tanpa membawa identitas akun, credential, data realtime, atau progress sesi.
+
 ## Unduh
 
 Buka [release terbaru](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest), lalu pilih salah satu:
