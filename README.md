@@ -30,7 +30,7 @@ Paket release juga memuat:
 Contoh verifikasi melalui PowerShell:
 
 ```powershell
-Get-FileHash .\LiveFlowStudio-Setup-1.1.4-x64.exe -Algorithm SHA256
+Get-FileHash .\LiveFlowStudio-Setup-1.1.5-x64.exe -Algorithm SHA256
 ```
 
 ## Pembaruan otomatis
