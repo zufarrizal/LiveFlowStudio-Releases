@@ -8,7 +8,7 @@ Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi 1.1.6 merapikan modal Action dan Event: label kondisi tidak lagi tertutup, kontrol media sejajar dengan tombolnya, dan pemilih keystroke berada dalam satu baris yang konsisten.
+Versi 1.1.6 merapikan modal Action dan Event: label kondisi tidak lagi tertutup, kontrol media sejajar dengan tombolnya, dan pemilih keystroke berada dalam satu baris yang konsisten. Event List Box kini menampilkan nominal Saweria dengan ukuran caption yang seragam.
 
 Backup konfigurasi tetap mencakup Setup, preset aktif, Action, Event, Timer, Screen, Goal, Overlay Gallery, dan Event List Box tanpa membawa identitas akun, credential, data realtime, atau progress sesi.
 
