@@ -8,7 +8,7 @@ Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi 1.1.7 meningkatkan keterbacaan Event List Box: Event Likes memakai hati merah dengan nilai threshold di tengah, nominal Saweria tampil putih, dan label Action diperbesar serta diseimbangkan secara vertikal untuk semua pilihan jumlah kolom.
+Versi 1.1.9 mempercepat respons Action dengan menjalankan seluruh Action non-keystroke serta efek lokal/overlay secara paralel. Keystroke tetap memakai satu antrean aman. Watcher TikTok LIVE kini aktif otomatis setelah login, mendeteksi room sekitar setiap 10 detik, beralih ke WebSocket saat LIVE ditemukan, dan memperlambat pemeriksaan ketika TikTok membatasi akses.
 
 Backup konfigurasi tetap mencakup Setup, preset aktif, Action, Event, Timer, Screen, Goal, Overlay Gallery, dan Event List Box tanpa membawa identitas akun, credential, data realtime, atau progress sesi.
 
@@ -34,7 +34,7 @@ Paket release juga memuat:
 Contoh verifikasi melalui PowerShell:
 
 ```powershell
-Get-FileHash .\LiveFlowStudio-Setup-1.1.7-x64.exe -Algorithm SHA256
+Get-FileHash .\LiveFlowStudio-Setup-1.1.9-x64.exe -Algorithm SHA256
 ```
 
 ## Pembaruan otomatis
@@ -59,4 +59,4 @@ Setelah login, LiveFlow Studio memeriksa release stabil terbaru. Aplikasi hanya 
 
 Informasi pengembang dan kontak resmi tersedia melalui [GitHub Zufar Rizal](https://github.com/zufarrizal). Dukungan sukarela untuk pengembangan dapat diberikan melalui [Saweria](https://saweria.co/ZufarRizal).
 
-Copyright © 2026 Zufar Rizal. All rights reserved.
+Copyright Â© 2026 Zufar Rizal. All rights reserved.
