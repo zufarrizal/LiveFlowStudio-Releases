@@ -59,4 +59,4 @@ Setelah login, LiveFlow Studio memeriksa release stabil terbaru. Aplikasi hanya 
 
 Informasi pengembang dan kontak resmi tersedia melalui [GitHub Zufar Rizal](https://github.com/zufarrizal). Dukungan sukarela untuk pengembangan dapat diberikan melalui [Saweria](https://saweria.co/ZufarRizal).
 
-Copyright Â© 2026 Zufar Rizal. All rights reserved.
+Copyright © 2026 Zufar Rizal. All rights reserved.
