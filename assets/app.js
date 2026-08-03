@@ -190,6 +190,10 @@
       label.className = `tag${item.accent === "yellow" ? " yellow-tag" : ""}`;
       label.textContent = item.label;
 
+      const meta = document.createElement("div");
+      meta.className = "capability-meta";
+      meta.append(icon, label);
+
       const title = document.createElement("h3");
       title.textContent = item.title;
       const summary = document.createElement("p");
@@ -202,7 +206,7 @@
         proof.append(bullet);
       });
 
-      card.append(icon, label, title, summary, proof);
+      card.append(meta, title, summary, proof);
       grid.append(card);
     });
     grid.setAttribute("aria-busy", "false");
