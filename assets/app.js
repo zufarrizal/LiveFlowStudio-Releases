@@ -55,6 +55,7 @@
   window.addEventListener("scroll", updateHeader, { passive: true });
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.classList.add("motion-ready");
   const revealObserver = !reducedMotion && "IntersectionObserver" in window
     ? new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -66,12 +67,37 @@
     : null;
 
   const observeReveals = (root = document) => {
+    const regionOrders = new Map();
     queryAll(".reveal", root).forEach((element) => {
-      if (revealObserver) revealObserver.observe(element);
+      const region = element.closest(".section, .site-footer") || root;
+      const order = regionOrders.get(region) || 0;
+      element.style.setProperty("--reveal-order", String(order % 8));
+      element.style.setProperty("--reveal-delay", `${(order % 8) * 55}ms`);
+      regionOrders.set(region, order + 1);
+      if (region instanceof Element && region.classList.contains("section-active")) element.classList.add("visible");
+      else if (revealObserver) revealObserver.observe(element);
       else element.classList.add("visible");
     });
   };
   observeReveals();
+
+  const motionRegions = queryAll("main > section[id], .site-footer");
+  if (!reducedMotion && "IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("section-active");
+        queryAll(".reveal", entry.target).forEach((element) => {
+          element.classList.add("visible");
+          revealObserver?.unobserve(element);
+        });
+        sectionObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: "-8% 0px -8%", threshold: 0.22 });
+    motionRegions.forEach((region) => sectionObserver.observe(region));
+  } else {
+    motionRegions.forEach((region) => region.classList.add("section-active"));
+  }
 
   const formatBytes = (bytes) => {
     if (!Number.isFinite(bytes) || bytes <= 0) return "See GitHub";
