@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "reviewedForVersion": "1.2.0",
+  "reviewedAt": "2026-08-03",
+  "releaseCopy": {
+    "1.2.0": {
+      "summary": "This release makes daily control faster, configuration moves safer, and Zal Digital products easier to discover without moving transactions into LiveFlow Studio.",
+      "highlights": [
+        {
+          "title": "Inline Action controls",
+          "description": "Edit duration, Action status, and configured effect availability directly from the Actions table."
+        },
+        {
+          "title": "Safer portable configuration",
+          "description": "Import adds preflight, automatic backup, rollback, cross-account remapping, and approved MyInstants audio recovery."
+        },
+        {
+          "title": "Faster gift maintenance",
+          "description": "Refresh the gift catalog from the global header or automatically after a successful configuration import."
+        },
+        {
+          "title": "Shop and Store Support",
+          "description": "Browse the Zal Digital catalog in the app, then continue checkout, payment, delivery, and support in the official Telegram bot."
+        }
+      ]
+    }
+  },
+  "capabilities": [
+    {
+      "id": "live-inputs",
+      "icon": "activity",
+      "accent": "pink",
+      "label": "LIVE INPUTS",
+      "title": "TikTok LIVE and Saweria in one event flow",
+      "summary": "Receive gifts, follows, shares, subscriptions, comments, Donation Alerts, and MediaShare without making the Saweria connection depend on TikTok LIVE.",
+      "proof": ["Automatic LIVE watcher", "Gift catalog and simulator", "Independent Saweria reconnect"]
+    },
+    {
+      "id": "automation",
+      "icon": "sliders",
+      "accent": "violet",
+      "label": "RULE ENGINE",
+      "title": "Actions and Events that stay understandable",
+      "summary": "Build up to ten account-scoped presets with cooldowns, gift-combo handling, priority rules, random Actions, and multiple-Action routing.",
+      "proof": ["Inline duration and enable controls", "Event Simulator", "Transient execution log"]
+    },
+    {
+      "id": "outputs",
+      "icon": "bolt",
+      "accent": "cyan",
+      "label": "ACTION OUTPUTS",
+      "title": "Coordinate screen effects and local PC actions",
+      "summary": "Run animation, picture/GIF, video, YouTube, alert, audio, Minecraft command, keystroke, and Goal effects from the same Action.",
+      "proof": ["Parallel non-keystroke effects", "Per-effect status controls", "Bounded execution dispatcher"]
+    },
+    {
+      "id": "overlays",
+      "icon": "screen",
+      "accent": "green",
+      "label": "REALTIME OVERLAYS",
+      "title": "Browser Sources for screens, Goals, and widgets",
+      "summary": "Use eight Overlay Screens, metric Goals, and session widgets for Gift Feed, Chat, Top Gifter, and Top Liker in OBS or TikTok LIVE Studio.",
+      "proof": ["Permanent HTTPS URLs", "Account-scoped appearance settings", "Room-aware session reset"]
+    },
+    {
+      "id": "portability",
+      "icon": "file",
+      "accent": "yellow",
+      "label": "PORTABLE CONFIG",
+      "title": "Move setups without embedding private media",
+      "summary": "Export one JSON configuration without credentials, account identity, session progress, or audio files. Import uses preflight, backup, rollback, and approved MyInstants recovery.",
+      "proof": ["Cross-account ID remapping", "SHA-256 preflight checks", "Missing local media disabled safely"]
+    },
+    {
+      "id": "local-first",
+      "icon": "database",
+      "accent": "orange",
+      "label": "LOCAL-FIRST CONTROL",
+      "title": "Operational settings stay on the Windows device",
+      "summary": "SQLite stores account-scoped setup data while Windows Credential Manager protects supported integration secrets. Raw LIVE and execution logs remain temporary.",
+      "proof": ["No persistent event history", "Local media library", "Authenticated cloud relay only when needed"]
+    }
+  ],
+  "faqCategories": [
+    { "id": "getting-started", "label": "Getting started" },
+    { "id": "connections", "label": "LIVE & events" },
+    { "id": "actions", "label": "Actions" },
+    { "id": "overlays", "label": "Overlays" },
+    { "id": "data", "label": "Data & import" },
+    { "id": "updates", "label": "Updates & support" }
+  ],
+  "faqs": [
+    {
+      "category": "getting-started",
+      "question": "What does LiveFlow Studio require?",
+      "answer": "LiveFlow Studio targets Windows 10 or Windows 11 x64, requires Microsoft Edge WebView2, and needs internet access for login and network-backed features. Minecraft also requires a compatible server or plugin when that integration is used."
+    },
+    {
+      "category": "getting-started",
+      "question": "Can I use the application without an active account?",
+      "answer": "No. Access is invite-only. The account must be active and mapped to the authorized TikTok username before LiveFlow Studio can start its production services."
+    },
+    {
+      "category": "getting-started",
+      "question": "What is the difference between the installer and portable ZIP?",
+      "answer": "Both packages contain the same application version. The installer adds LiveFlow Studio to Windows normally; the portable ZIP can be extracted to a dedicated folder and run without installation."
+    },
+    {
+      "category": "connections",
+      "question": "Which TikTok LIVE interactions can trigger an Event?",
+      "answer": "Events can respond to gifts, follows, shares, subscriptions, comments, and supported numeric conditions. Gift Events can use specific-gift priority, minimum coin fallback, cooldowns, and repeat-combo rules."
+    },
+    {
+      "category": "connections",
+      "question": "Do I need to connect TikTok LIVE manually every time?",
+      "answer": "No. After login, the LIVE watcher checks the authorized username automatically and switches to the realtime listener when a valid active room is found. Check LIVE now is a manual recovery action, not a required connection step."
+    },
+    {
+      "category": "connections",
+      "question": "Does Saweria depend on the TikTok LIVE connection?",
+      "answer": "No. Saweria Donation Alert and MediaShare use their own saved stream key and reconnect flow, so a Saweria Event can run even when TikTok LIVE is not connected."
+    },
+    {
+      "category": "actions",
+      "question": "What can an Action run?",
+      "answer": "An Action can use animation, picture/GIF, video file, YouTube, alert, audio, Minecraft command, keystroke, Goal update, and Overlay Screen effects that have been configured in the editor."
+    },
+    {
+      "category": "actions",
+      "question": "Can I change an Action without reopening the editor?",
+      "answer": "Yes. The Actions table can update duration, enable or disable an Action, and toggle configured Animation, Picture/GIF, Sound, Video, and YouTube effects without deleting their settings. At least one effect must remain active."
+    },
+    {
+      "category": "actions",
+      "question": "Can multiple Actions run at the same time?",
+      "answer": "Non-keystroke Actions and their effects can start concurrently. Actions containing keystrokes use one global sequential queue to prevent competing keyboard automation. The Live Execution Log temporarily reports job and per-effect results."
+    },
+    {
+      "category": "overlays",
+      "question": "Which realtime overlays are available?",
+      "answer": "The production application supports eight Overlay Screens, Goal Overlays, and Overlay Gallery widgets for Gift Feed, Chat, Top Gifter, and Top Liker. Their HTTPS URLs can be added as Browser Sources in OBS or TikTok LIVE Studio."
+    },
+    {
+      "category": "overlays",
+      "question": "Must the desktop application stay open for overlays?",
+      "answer": "Yes for live publishing and local media. LiveFlow Studio must remain open, logged in, and online while local picture/GIF or video media is relayed. Realtime session content is not stored as permanent event history."
+    },
+    {
+      "category": "data",
+      "question": "Where are settings, credentials, and media stored?",
+      "answer": "Account-scoped operational settings are stored in local SQLite. Supported integration secrets are stored in Windows Credential Manager. Audio, pictures, videos, and gift icons remain in the local media folder."
+    },
+    {
+      "category": "data",
+      "question": "Does exported JSON contain audio files or account secrets?",
+      "answer": "No. Export does not embed audio, local picture/video files, login sessions, TikTok identity, private overlay URLs, or integration credentials. It carries the portable configuration needed to rebuild the setup safely."
+    },
+    {
+      "category": "data",
+      "question": "What happens to missing media during import?",
+      "answer": "Preflight reports missing media before changes are applied. Approved MyInstants audio can be restored from its validated original source. Missing local picture/GIF or video paths are discarded and affected Actions remain disabled for review."
+    },
+    {
+      "category": "data",
+      "question": "Can a configuration be imported into another account?",
+      "answer": "Yes. Import preserves the destination identity and remaps Action, Event, and Timer IDs with their references. It creates an automatic backup, disables global Actions, and leaves sensitive imported Actions disabled until reviewed."
+    },
+    {
+      "category": "updates",
+      "question": "How are application updates verified?",
+      "answer": "LiveFlow Studio only accepts installer assets from the official public release repository. The installer is downloaded to a local cache and checked against the published SHA-256 manifest before Windows is allowed to open it."
+    },
+    {
+      "category": "updates",
+      "question": "Why can Windows show Unknown Publisher or SmartScreen?",
+      "answer": "The current installer is not commercially code-signed. Download only from the official release repository and compare the published SHA-256 value before running the package."
+    },
+    {
+      "category": "updates",
+      "question": "Does the in-app Shop process payment or deliver products?",
+      "answer": "No. Shop is a read-only Zal Digital catalog. Product checkout, payment, delivery, and Store Support continue through the official Telegram bot. LiveFlow Studio does not store transaction data."
+    }
+  ]
+}

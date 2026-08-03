@@ -1,0 +1,95 @@
+name: Sync landing release data
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-landing-release-data
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Pages repository
+        uses: actions/checkout@v4
+
+      - name: Build validated release snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          gh api "repos/${GITHUB_REPOSITORY}/releases/latest" > "${RUNNER_TEMP}/release.json"
+          version="$(jq -r '.tag_name | sub("^v"; "")' "${RUNNER_TEMP}/release.json")"
+          [[ "${version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+
+          installer="LiveFlowStudio-Setup-${version}-x64.exe"
+          portable="LiveFlowStudio-${version}-windows-x64.zip"
+          release_prefix="https://github.com/${GITHUB_REPOSITORY}/releases/download/v${version}/"
+
+          asset_value() {
+            jq -er --arg name "$1" --arg key "$2" '.assets[] | select(.name == $name) | .[$key]' "${RUNNER_TEMP}/release.json"
+          }
+
+          installer_url="$(asset_value "${installer}" browser_download_url)"
+          installer_size="$(asset_value "${installer}" size)"
+          portable_url="$(asset_value "${portable}" browser_download_url)"
+          portable_size="$(asset_value "${portable}" size)"
+          checksum_url="$(asset_value "SHA256SUMS.txt" browser_download_url)"
+
+          [[ "${installer_url}" == "${release_prefix}${installer}" ]]
+          [[ "${portable_url}" == "${release_prefix}${portable}" ]]
+          [[ "${checksum_url}" == "${release_prefix}SHA256SUMS.txt" ]]
+
+          curl --fail --location --silent --show-error "${checksum_url}" --output "${RUNNER_TEMP}/SHA256SUMS.txt"
+          installer_sha="$(awk -v file="${installer}" '$2 == file { print tolower($1) }' "${RUNNER_TEMP}/SHA256SUMS.txt")"
+          portable_sha="$(awk -v file="${portable}" '$2 == file { print tolower($1) }' "${RUNNER_TEMP}/SHA256SUMS.txt")"
+          [[ "${installer_sha}" =~ ^[a-f0-9]{64}$ ]]
+          [[ "${portable_sha}" =~ ^[a-f0-9]{64}$ ]]
+
+          mkdir -p data
+          jq -n \
+            --arg version "${version}" \
+            --arg publishedAt "$(jq -r '.published_at' "${RUNNER_TEMP}/release.json")" \
+            --arg releaseUrl "$(jq -r '.html_url' "${RUNNER_TEMP}/release.json")" \
+            --arg checksumUrl "${checksum_url}" \
+            --arg installerName "${installer}" \
+            --arg installerUrl "${installer_url}" \
+            --argjson installerSize "${installer_size}" \
+            --arg installerSha "${installer_sha}" \
+            --arg portableName "${portable}" \
+            --arg portableUrl "${portable_url}" \
+            --argjson portableSize "${portable_size}" \
+            --arg portableSha "${portable_sha}" \
+            '{
+              schemaVersion: 1,
+              version: $version,
+              publishedAt: $publishedAt,
+              releaseUrl: $releaseUrl,
+              checksumUrl: $checksumUrl,
+              assets: {
+                installer: { name: $installerName, url: $installerUrl, size: $installerSize, sha256: $installerSha },
+                portable: { name: $portableName, url: $portableUrl, size: $portableSize, sha256: $portableSha }
+              }
+            }' > data/release.json
+
+      - name: Commit snapshot when changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/release.json; then
+            echo "Release snapshot is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/release.json
+          git commit -m "chore: sync landing release data"
+          git push

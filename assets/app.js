@@ -1,18 +1,29 @@
 (() => {
   "use strict";
 
-  const RELEASE_API = "https://api.github.com/repos/zufarrizal/LiveFlowStudio-Releases/releases/latest";
-  const RELEASE_PATH = "/zufarrizal/LiveFlowStudio-Releases/releases/download/";
-  const FALLBACK_VERSION = "1.2.0";
-  const ASSET_PATTERNS = {
-    installer: /^LiveFlowStudio-Setup-[0-9]+\.[0-9]+\.[0-9]+-x64\.exe$/i,
-    portable: /^LiveFlowStudio-[0-9]+\.[0-9]+\.[0-9]+-windows-x64\.zip$/i,
+  const REPOSITORY_PATH = "/zufarrizal/LiveFlowStudio-Releases";
+  const LATEST_RELEASE_URL = `https://github.com${REPOSITORY_PATH}/releases/latest`;
+  const RELEASE_DATA_URL = "data/release.json";
+  const PRODUCT_DATA_URL = "data/product.json";
+  const CHECKSUM_PATTERN = /^[a-f0-9]{64}$/i;
+  const VERSION_PATTERN = /^\d+\.\d+\.\d+$/;
+  const ICON_PATHS = {
+    activity: "M4 12h3l2-6 4 12 2-6h5",
+    sliders: "M4 7h7M15 7h5M4 17h5M13 17h7M11 4v6M9 14v6",
+    bolt: "m13 2-9 12h7l-1 8 9-12h-7z",
+    screen: "M3 3h18v14H3zM8 21h8M12 17v4M7 12l3-3 3 3 4-5",
+    file: "M6 2h8l4 4v16H6zM14 2v5h5M9 12h6M9 16h6",
+    database: "M4 5c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Zm0 0v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5m-16 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6",
+    chevron: "m6 9 6 6 6-6",
   };
 
-  const queryAll = (selector) => Array.from(document.querySelectorAll(selector));
+  const queryAll = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+  const isNonEmptyText = (value) => typeof value === "string" && value.trim().length > 0;
   const menuButton = document.querySelector("[data-menu-button]");
   const navigation = document.querySelector("[data-navigation]");
   const header = document.querySelector("[data-header]");
+  const releaseStatus = document.querySelector("[data-release-status]");
+  const copyStatus = document.querySelector("[data-copy-status]");
 
   const closeNavigation = () => {
     if (!menuButton || !navigation) return;
@@ -44,83 +55,285 @@
   window.addEventListener("scroll", updateHeader, { passive: true });
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const reveals = queryAll(".reveal");
-  if (reducedMotion || !("IntersectionObserver" in window)) {
-    reveals.forEach((element) => element.classList.add("visible"));
-  } else {
-    const observer = new IntersectionObserver((entries) => {
+  const revealObserver = !reducedMotion && "IntersectionObserver" in window
+    ? new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
+        revealObserver.unobserve(entry.target);
       });
-    }, { rootMargin: "0px 0px -8%", threshold: 0.08 });
-    reveals.forEach((element) => observer.observe(element));
-  }
+    }, { rootMargin: "0px 0px -8%", threshold: 0.08 })
+    : null;
+
+  const observeReveals = (root = document) => {
+    queryAll(".reveal", root).forEach((element) => {
+      if (revealObserver) revealObserver.observe(element);
+      else element.classList.add("visible");
+    });
+  };
+  observeReveals();
 
   const formatBytes = (bytes) => {
-    if (!Number.isFinite(bytes) || bytes <= 0) return "—";
+    if (!Number.isFinite(bytes) || bytes <= 0) return "See GitHub";
     return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
   };
 
-  const trustedReleaseUrl = (value) => {
+  const trustedGithubUrl = (value, requiredPath) => {
     try {
       const url = new URL(value);
-      return url.protocol === "https:" && url.hostname === "github.com" && url.pathname.startsWith(RELEASE_PATH);
+      return url.protocol === "https:" && url.hostname === "github.com" && url.pathname.startsWith(requiredPath);
     } catch {
       return false;
     }
   };
 
-  const applyRelease = (release) => {
-    if (!release || typeof release !== "object" || !Array.isArray(release.assets)) return false;
-    const version = String(release.tag_name || "").replace(/^v/i, "").trim();
-    if (version !== FALLBACK_VERSION) return false;
+  const validateRelease = (release) => {
+    if (!release || release.schemaVersion !== 1 || typeof release.assets !== "object") return null;
+    const version = String(release.version || "").trim();
+    if (!VERSION_PATTERN.test(version)) return null;
 
-    const matchedAssets = Object.entries(ASSET_PATTERNS).map(([kind, pattern]) => {
-      const asset = release.assets.find((candidate) => pattern.test(String(candidate?.name || "")));
-      return asset && trustedReleaseUrl(asset.browser_download_url) ? { kind, asset } : null;
-    });
-    if (matchedAssets.some((item) => item === null)) return false;
+    const expectedNames = {
+      installer: `LiveFlowStudio-Setup-${version}-x64.exe`,
+      portable: `LiveFlowStudio-${version}-windows-x64.zip`,
+    };
+    const downloadPath = `${REPOSITORY_PATH}/releases/download/v${version}/`;
+    const assets = {};
 
-    matchedAssets.forEach((item) => {
-      if (!item) return;
-      const { kind, asset } = item;
-      queryAll(`[data-download="${kind}"]`).forEach((link) => {
-        if (link instanceof HTMLAnchorElement) link.href = asset.browser_download_url;
-      });
-      queryAll(`[data-size="${kind}"]`).forEach((element) => {
-        element.textContent = formatBytes(Number(asset.size));
-      });
-    });
-
-    queryAll("[data-version]").forEach((element) => { element.textContent = version; });
-    const releaseLink = document.querySelector("[data-release-link]");
-    if (releaseLink instanceof HTMLAnchorElement && typeof release.html_url === "string") {
-      const url = new URL(release.html_url);
-      if (url.protocol === "https:" && url.hostname === "github.com" && url.pathname.startsWith("/zufarrizal/LiveFlowStudio-Releases/releases/")) releaseLink.href = url.href;
+    for (const [kind, expectedName] of Object.entries(expectedNames)) {
+      const asset = release.assets[kind];
+      if (asset?.name !== expectedName || !trustedGithubUrl(asset.url, downloadPath)
+        || !Number.isFinite(asset.size) || asset.size <= 0 || !CHECKSUM_PATTERN.test(asset.sha256 || "")) return null;
+      assets[kind] = asset;
     }
-    return true;
+
+    const checksumUrl = trustedGithubUrl(release.checksumUrl, downloadPath)
+      && new URL(release.checksumUrl).pathname === `${downloadPath}SHA256SUMS.txt`
+      ? release.checksumUrl
+      : "";
+    if (!checksumUrl) return null;
+
+    const releaseUrl = trustedGithubUrl(release.releaseUrl, `${REPOSITORY_PATH}/releases/`)
+      ? release.releaseUrl
+      : LATEST_RELEASE_URL;
+
+    return {
+      version,
+      assets,
+      checksumUrl,
+      releaseUrl,
+      publishedAt: isNonEmptyText(release.publishedAt) ? release.publishedAt : "",
+    };
   };
 
-  const releaseStatus = document.querySelector("[data-release-status]");
-  fetch(RELEASE_API, { headers: { Accept: "application/vnd.github+json" } })
-    .then((response) => {
-      if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
-      return response.json();
-    })
-    .then((release) => {
-      if (!applyRelease(release)) throw new Error("Expected release assets were not found");
-      if (releaseStatus) {
-        releaseStatus.textContent = `Release ${FALLBACK_VERSION} asset details verified from GitHub.`;
-        releaseStatus.classList.add("verified");
-      }
-    })
-    .catch(() => {
-      if (releaseStatus) releaseStatus.textContent = `GitHub is unavailable. Showing bundled release ${FALLBACK_VERSION} details.`;
+  const validateProductData = (data) => {
+    if (!data || data.schemaVersion !== 1 || !Array.isArray(data.capabilities) || !Array.isArray(data.faqCategories) || !Array.isArray(data.faqs)) return null;
+    const categories = new Set(data.faqCategories.map((item) => item?.id));
+    const validCapabilities = data.capabilities.every((item) =>
+      isNonEmptyText(item?.id) && isNonEmptyText(item?.icon) && ICON_PATHS[item.icon] && isNonEmptyText(item?.accent)
+      && isNonEmptyText(item?.label) && isNonEmptyText(item?.title) && isNonEmptyText(item?.summary)
+      && Array.isArray(item?.proof) && item.proof.length > 0 && item.proof.every(isNonEmptyText));
+    const validCategories = data.faqCategories.length > 0 && data.faqCategories.every((item) => isNonEmptyText(item?.id) && isNonEmptyText(item?.label));
+    const validFaqs = data.faqs.length > 0 && data.faqs.every((item) => categories.has(item?.category) && isNonEmptyText(item?.question) && isNonEmptyText(item?.answer));
+    return validCapabilities && validCategories && validFaqs ? data : null;
+  };
+
+  const createIcon = (name) => {
+    const namespace = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(namespace, "svg");
+    const path = document.createElementNS(namespace, "path");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    path.setAttribute("d", ICON_PATHS[name]);
+    svg.append(path);
+    return svg;
+  };
+
+  const renderCapabilities = (product) => {
+    const grid = document.querySelector("[data-capability-grid]");
+    if (!grid) return;
+    grid.replaceChildren();
+    product.capabilities.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "feature-card capability-card reveal";
+
+      const icon = document.createElement("span");
+      icon.className = `feature-icon ${item.accent}`;
+      icon.append(createIcon(item.icon));
+
+      const label = document.createElement("span");
+      label.className = `tag${item.accent === "yellow" ? " yellow-tag" : ""}`;
+      label.textContent = item.label;
+
+      const title = document.createElement("h3");
+      title.textContent = item.title;
+      const summary = document.createElement("p");
+      summary.textContent = item.summary;
+      const proof = document.createElement("ul");
+      proof.className = "capability-proof";
+      item.proof.forEach((text) => {
+        const bullet = document.createElement("li");
+        bullet.textContent = text;
+        proof.append(bullet);
+      });
+
+      card.append(icon, label, title, summary, proof);
+      grid.append(card);
+    });
+    grid.setAttribute("aria-busy", "false");
+    observeReveals(grid);
+  };
+
+  const createFaqDetails = (faq, open) => {
+    const details = document.createElement("details");
+    details.className = "reveal";
+    details.open = open;
+    const summary = document.createElement("summary");
+    summary.append(document.createTextNode(faq.question), createIcon("chevron"));
+    const answer = document.createElement("p");
+    answer.textContent = faq.answer;
+    details.append(summary, answer);
+    return details;
+  };
+
+  const renderFaq = (product) => {
+    const tabs = document.querySelector("[data-faq-tabs]");
+    const list = document.querySelector("[data-faq-list]");
+    if (!tabs || !list) return;
+    tabs.replaceChildren();
+    tabs.setAttribute("role", "tablist");
+    list.setAttribute("role", "tabpanel");
+    list.id = "faq-panel";
+
+    const selectCategory = (categoryId, focusTab = false) => {
+      queryAll("[role='tab']", tabs).forEach((tab) => {
+        const selected = tab.dataset.category === categoryId;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        if (selected && focusTab) tab.focus();
+      });
+      list.replaceChildren();
+      const matchingFaqs = product.faqs.filter((faq) => faq.category === categoryId);
+      matchingFaqs.forEach((faq, index) => list.append(createFaqDetails(faq, index === 0)));
+      list.setAttribute("aria-busy", "false");
+      observeReveals(list);
+    };
+
+    product.faqCategories.forEach((category, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "faq-tab";
+      button.textContent = category.label;
+      button.dataset.category = category.id;
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-controls", "faq-panel");
+      button.setAttribute("aria-selected", String(index === 0));
+      button.tabIndex = index === 0 ? 0 : -1;
+      button.addEventListener("click", () => selectCategory(category.id));
+      tabs.append(button);
     });
 
-  const copyStatus = document.querySelector("[data-copy-status]");
+    tabs.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      const buttons = queryAll("[role='tab']", tabs);
+      const currentIndex = buttons.indexOf(document.activeElement);
+      if (currentIndex < 0) return;
+      event.preventDefault();
+      let nextIndex = event.key === "Home" ? 0 : event.key === "End" ? buttons.length - 1 : currentIndex + (event.key === "ArrowRight" ? 1 : -1);
+      nextIndex = (nextIndex + buttons.length) % buttons.length;
+      selectCategory(buttons[nextIndex].dataset.category, true);
+    });
+
+    selectCategory(product.faqCategories[0].id);
+  };
+
+  const showProductError = () => {
+    const message = "Product information could not be loaded. Open the repository documentation for verified details.";
+    [document.querySelector("[data-capability-grid]"), document.querySelector("[data-faq-list]")].forEach((container) => {
+      if (!container) return;
+      const paragraph = document.createElement("p");
+      paragraph.className = "data-placeholder data-error";
+      paragraph.textContent = message;
+      container.replaceChildren(paragraph);
+      container.setAttribute("aria-busy", "false");
+    });
+  };
+
+  const renderReleaseCopy = (release, product) => {
+    const container = document.querySelector("[data-release-highlights]");
+    const summary = document.querySelector("[data-release-summary]");
+    const date = document.querySelector("[data-release-date]");
+    if (!container) return;
+
+    const copy = product?.releaseCopy?.[release.version];
+    const hasMatchingCopy = copy && isNonEmptyText(copy.summary) && Array.isArray(copy.highlights)
+      && copy.highlights.length > 0 && copy.highlights.every((item) => isNonEmptyText(item?.title) && isNonEmptyText(item?.description));
+
+    if (summary) {
+      summary.textContent = hasMatchingCopy
+        ? copy.summary
+        : `Version ${release.version} is available. Its official release notes have not yet been curated into English for this page.`;
+    }
+    if (date) {
+      const parsedDate = new Date(release.publishedAt);
+      date.textContent = Number.isNaN(parsedDate.getTime())
+        ? `Verified release ${release.version}`
+        : `Published ${new Intl.DateTimeFormat("en", { dateStyle: "long" }).format(parsedDate)}`;
+    }
+
+    container.replaceChildren();
+    const highlights = hasMatchingCopy
+      ? copy.highlights.slice(0, 4)
+      : [{ title: "Official release notes", description: "Open the verified GitHub release for the complete change list and upgrade guidance." }];
+    highlights.forEach((item, index) => {
+      const article = document.createElement("article");
+      article.className = "release-item reveal";
+      const number = document.createElement("span");
+      number.textContent = String(index + 1).padStart(2, "0");
+      const content = document.createElement("div");
+      const title = document.createElement("h3");
+      title.textContent = item.title;
+      const description = document.createElement("p");
+      description.textContent = item.description;
+      content.append(title, description);
+      article.append(number, content);
+      container.append(article);
+    });
+    container.setAttribute("aria-busy", "false");
+    observeReveals(container);
+  };
+
+  const applyRelease = (release) => {
+    queryAll("[data-version]").forEach((element) => { element.textContent = release.version; });
+    ["installer", "portable"].forEach((kind) => {
+      const asset = release.assets[kind];
+      queryAll(`[data-download="${kind}"]`).forEach((link) => {
+        if (link instanceof HTMLAnchorElement) link.href = asset.url;
+      });
+      queryAll(`[data-size="${kind}"]`).forEach((element) => { element.textContent = formatBytes(Number(asset.size)); });
+    });
+    const releaseLink = document.querySelector("[data-release-link]");
+    if (releaseLink instanceof HTMLAnchorElement) releaseLink.href = release.releaseUrl;
+    const hashCommand = document.querySelector("[data-hash-command]");
+    if (hashCommand) hashCommand.textContent = `Get-FileHash .\\${release.assets.installer.name} -Algorithm SHA256`;
+    const link = document.querySelector("[data-checksum-link]");
+    if (link instanceof HTMLAnchorElement) link.href = release.checksumUrl;
+    ["installer", "portable"].forEach((kind) => {
+      const value = document.querySelector(`[data-checksum="${kind}"]`);
+      if (value) value.textContent = release.assets[kind].sha256.toLowerCase();
+      document.querySelector(`[data-copy="${kind}"]`)?.removeAttribute("disabled");
+    });
+  };
+
+  const setReleaseFallback = () => {
+    ["installer", "portable"].forEach((kind) => {
+      const value = document.querySelector(`[data-checksum="${kind}"]`);
+      if (value) value.textContent = "Available on the official release page";
+      document.querySelector(`[data-copy="${kind}"]`)?.setAttribute("disabled", "");
+    });
+    const link = document.querySelector("[data-checksum-link]");
+    if (link instanceof HTMLAnchorElement) link.href = LATEST_RELEASE_URL;
+  };
+
   const writeClipboard = async (value) => {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(value);
@@ -141,8 +354,8 @@
   queryAll("[data-copy]").forEach((button) => {
     button.addEventListener("click", async () => {
       const kind = button.getAttribute("data-copy");
-      const checksum = document.querySelector(`[data-checksum="${kind}"]`)?.textContent?.trim();
-      if (!checksum) return;
+      const checksum = document.querySelector(`[data-checksum="${kind}"]`)?.textContent?.trim() || "";
+      if (!CHECKSUM_PATTERN.test(checksum)) return;
       button.setAttribute("disabled", "");
       try {
         await writeClipboard(checksum);
@@ -156,6 +369,60 @@
         button.removeAttribute("disabled");
       }
     });
+  });
+
+  const loadProduct = fetch(PRODUCT_DATA_URL, { cache: "no-cache" })
+    .then((response) => {
+      if (!response.ok) throw new Error(`Product data returned ${response.status}`);
+      return response.json();
+    })
+    .then((data) => {
+      const product = validateProductData(data);
+      if (!product) throw new Error("Product data failed validation");
+      renderCapabilities(product);
+      renderFaq(product);
+      return product;
+    })
+    .catch(() => {
+      showProductError();
+      return null;
+    });
+
+  const loadRelease = fetch(RELEASE_DATA_URL, {
+    cache: "no-cache",
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error(`Release data returned ${response.status}`);
+      return response.json();
+    })
+    .then((data) => {
+      const release = validateRelease(data);
+      if (!release) throw new Error("Release assets failed validation");
+      applyRelease(release);
+      return release;
+    })
+    .catch(() => null);
+
+  Promise.all([loadProduct, loadRelease]).then(([product, release]) => {
+    if (!release) {
+      setReleaseFallback();
+      if (releaseStatus) releaseStatus.textContent = "Verified release data is temporarily unavailable. Open the official release page to download.";
+      const releaseHighlights = document.querySelector("[data-release-highlights]");
+      if (releaseHighlights) {
+        const message = document.createElement("p");
+        message.className = "data-placeholder data-error";
+        message.textContent = "Release details are temporarily unavailable. Use the official release notes link.";
+        releaseHighlights.replaceChildren(message);
+        releaseHighlights.setAttribute("aria-busy", "false");
+      }
+      return;
+    }
+
+    renderReleaseCopy(release, product);
+    if (releaseStatus) {
+      releaseStatus.textContent = `Release ${release.version} files and checksums loaded from the verified release snapshot.`;
+      releaseStatus.classList.add("verified");
+    }
   });
 
   queryAll("[data-year]").forEach((element) => { element.textContent = String(new Date().getFullYear()); });
