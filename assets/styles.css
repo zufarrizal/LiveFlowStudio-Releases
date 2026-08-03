@@ -30,7 +30,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 24px); }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
 body { min-width: 320px; margin: 0; overflow-x: hidden; color: var(--text); background: var(--background); font-family: var(--font-body); font-size: 16px; line-height: 1.65; letter-spacing: 0; text-rendering: optimizeLegibility; }
 body::before { position: fixed; z-index: -2; inset: 0; content: ""; background-image: linear-gradient(rgb(255 255 255 / 2.1%) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 2.1%) 1px, transparent 1px); background-size: 48px 48px; mask-image: linear-gradient(to bottom, black, transparent 86%); pointer-events: none; }
 body::after { position: fixed; z-index: -3; inset: 0; content: ""; background: radial-gradient(circle at 50% -15%, rgb(94 75 190 / 24%), transparent 42%), var(--background); pointer-events: none; }
@@ -280,6 +280,59 @@ main > section[id] { min-height: 100vh; min-height: 100dvh; }
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 520ms var(--ease), transform 520ms var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
 
+@media (min-width: 901px) {
+  main > section[id]:not(#top) { padding-block: clamp(32px, 5vh, 56px); display: flex; align-items: center; }
+  main > section[id]:not(#top) > .page-width { width: min(var(--page-width), calc(100% - 48px)); }
+  main > section[id]#features { align-items: flex-start; }
+  .section-heading h2 { font-size: clamp(2rem, 3.2vw, 3rem); text-wrap: balance; }
+  .section-heading p { font-size: 16px; line-height: 1.55; }
+
+  .steps-grid { margin-top: 34px; }
+  .step-card { min-height: 240px; padding: 24px; }
+  .step-card h3 { margin-top: 22px; }
+
+  .bento-grid { margin-top: 18px; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .feature-card, .feature-wide { min-height: 212px; padding: 18px; }
+  .feature-wide { grid-column: span 2; grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .feature-icon { width: 42px; height: 42px; border-radius: 12px; }
+  .feature-icon svg { width: 19px; height: 19px; }
+  .feature-card > h3 { margin: 16px 0 8px; font-size: 18px; }
+  .feature-card p { font-size: 12.5px; line-height: 1.4; }
+  .feature-copy h3 { margin: 10px 0 9px; font-size: 23px; }
+  .tag { margin-top: 12px; }
+  .pulse-visual, .audio-visual, .mini-toggles, .overlay-mini { display: none; }
+
+  .release-grid { align-items: center; gap: 60px; }
+  .release-grid > .section-heading { position: static; }
+  .release-item { min-height: 112px; padding: 16px 0; }
+
+  .download-section > .page-width { display: grid; grid-template-columns: minmax(240px, .64fr) minmax(0, 1.36fr); grid-template-areas: "heading packages" "heading checksum"; align-items: start; gap: 12px 40px; }
+  .download-section .section-heading { grid-area: heading; margin: 0; text-align: left; }
+  .download-section .api-status { margin-top: 12px; }
+  .download-grid { grid-area: packages; width: 100%; max-width: none; margin: 0; gap: 14px; }
+  .download-card { min-height: 284px; padding: 20px; }
+  .package-icon { width: 44px; height: 44px; border-radius: 13px; }
+  .package-icon svg { width: 21px; height: 21px; }
+  .package-meta { margin-top: 11px; }
+  .download-card h3 { margin: 4px 0 7px; font-size: 22px; }
+  .download-card p { font-size: 13px; line-height: 1.4; }
+  .download-card dl { margin: auto 0 14px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .download-card dl div { min-height: 42px; padding: 0 9px; display: grid; align-content: center; justify-content: start; gap: 1px; border-bottom: 0; border-left: 1px solid var(--border-soft); }
+  .download-card dl div:first-child { padding-left: 0; border-left: 0; }
+  .download-card dt, .download-card dd { font-size: 10px; }
+  .download-card .button { min-height: 48px; }
+  .checksum-panel { grid-area: checksum; width: 100%; max-width: none; margin: 0; padding: 15px; }
+  .checksum-heading { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+  .checksum-heading h3 { font-size: 16px; }
+  .checksum-heading p { font-size: 12px; line-height: 1.35; }
+  .checksum-list { margin-top: 11px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .checksum-row { min-height: 54px; padding: 7px 8px 7px 11px; }
+  .checksum-row code { font-size: 8px; }
+  .copy-button { min-width: 66px; }
+  .powershell-command { margin-top: 9px; }
+  .copy-status { min-height: 15px; margin-top: 3px; }
+}
+
 @media (max-width: 1100px) {
   .primary-nav { gap: 18px; }
   .hero-grid { grid-template-columns: minmax(0, .92fr) minmax(480px, 1.08fr); gap: 35px; }
@@ -303,6 +356,24 @@ main > section[id] { min-height: 100vh; min-height: 100dvh; }
 }
 
 @media (min-width: 901px) and (max-height: 720px) {
+  main > section[id]:not(#top) { padding-block: 16px; }
+  .section-heading h2 { margin-block: 8px 10px; font-size: 2.25rem; }
+  .section-heading p { font-size: 14px; line-height: 1.4; }
+  .steps-grid { margin-top: 20px; }
+  .step-card { min-height: 220px; padding: 20px; }
+  .release-item { min-height: 100px; padding-block: 12px; }
+  .bento-grid { margin-top: 12px; gap: 10px; }
+  .feature-card, .feature-wide { min-height: 166px; padding: 14px; }
+  .feature-card p, .feature-copy p, .download-card p, .checksum-heading p, .copy-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .feature-copy h3 { margin-block: 8px 0; font-size: 20px; }
+  .feature-card > h3 { margin-top: 12px; font-size: 17px; }
+  .tag { margin-top: 9px; }
+  .download-card { min-height: 242px; padding: 16px; }
+  .download-card dl { margin-bottom: 10px; }
+  .checksum-panel { padding: 12px; }
+  .checksum-list { margin-top: 8px; }
+  .checksum-row { min-height: 50px; }
+  .powershell-command { margin-top: 7px; }
   .hero-grid { padding-block: 16px; }
   .hero h1 { margin-block: 12px 10px; font-size: clamp(2.1rem, min(3.8vw, 5.5vh), 2.8rem); }
   .hero-lead { font-size: 15px; line-height: 1.42; }
