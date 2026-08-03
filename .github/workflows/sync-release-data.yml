@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Pages repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build validated release snapshot
         env:
@@ -49,8 +49,9 @@ jobs:
           [[ "${checksum_url}" == "${release_prefix}SHA256SUMS.txt" ]]
 
           curl --fail --location --silent --show-error "${checksum_url}" --output "${RUNNER_TEMP}/SHA256SUMS.txt"
-          installer_sha="$(awk -v file="${installer}" '$2 == file { print tolower($1) }' "${RUNNER_TEMP}/SHA256SUMS.txt")"
-          portable_sha="$(awk -v file="${portable}" '$2 == file { print tolower($1) }' "${RUNNER_TEMP}/SHA256SUMS.txt")"
+          tr -d '\r' < "${RUNNER_TEMP}/SHA256SUMS.txt" > "${RUNNER_TEMP}/SHA256SUMS.normalized.txt"
+          installer_sha="$(awk -v file="${installer}" '$2 == file { print tolower($1) }' "${RUNNER_TEMP}/SHA256SUMS.normalized.txt")"
+          portable_sha="$(awk -v file="${portable}" '$2 == file { print tolower($1) }' "${RUNNER_TEMP}/SHA256SUMS.normalized.txt")"
           [[ "${installer_sha}" =~ ^[a-f0-9]{64}$ ]]
           [[ "${portable_sha}" =~ ^[a-f0-9]{64}$ ]]
 
