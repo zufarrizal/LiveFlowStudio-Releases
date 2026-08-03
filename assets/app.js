@@ -74,7 +74,13 @@
       element.style.setProperty("--reveal-order", String(order % 8));
       element.style.setProperty("--reveal-delay", `${(order % 8) * 55}ms`);
       regionOrders.set(region, order + 1);
-      if (region instanceof Element && region.classList.contains("section-active")) element.classList.add("visible");
+      if (region instanceof Element && region.classList.contains("section-active")) {
+        if (reducedMotion) element.classList.add("visible");
+        else {
+          element.classList.remove("visible");
+          requestAnimationFrame(() => requestAnimationFrame(() => element.classList.add("visible")));
+        }
+      }
       else if (revealObserver) revealObserver.observe(element);
       else element.classList.add("visible");
     });

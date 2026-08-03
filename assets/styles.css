@@ -194,8 +194,8 @@ main > section[id] { min-height: 100vh; min-height: 100dvh; }
 .tag { margin-top: 30px; display: block; color: #ff75a0; font-size: 10px; font-weight: 800; letter-spacing: 0; }.yellow-tag { color: var(--yellow); }
 .capability-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; }
 .capability-card { min-height: 300px; display: grid; grid-template-rows: auto auto 1fr auto; align-content: start; transition: border-color var(--motion-fast) ease, transform var(--motion-fast) var(--ease-playful), background var(--motion-fast) ease; }
-.capability-meta { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.capability-meta .tag { max-width: calc(100% - 64px); margin: 0; text-align: right; }
+.capability-meta { display: flex; align-items: center; justify-content: flex-start; gap: 12px; }
+.capability-meta .tag { max-width: none; margin: 0; font-size: 11px; line-height: 1.2; text-align: left; }
 .capability-card > h3 { margin: 18px 0 0; font-size: 21px; }
 .capability-card > p { margin-top: 10px; font-size: 13px; line-height: 1.5; }
 .capability-proof { margin: 18px 0 0; padding: 14px 0 0; display: grid; grid-template-columns: 1fr; gap: 7px; border-top: 1px solid var(--border-soft); list-style: none; }
@@ -346,8 +346,7 @@ main > section[id] { min-height: 100vh; min-height: 100dvh; }
 .section-active.site-footer .footer-grid nav a:nth-child(4) { animation-delay: 325ms; }
 
 @media (hover: hover) {
-  .capability-card:hover { border-color: #4d516e; background: rgb(27 28 46 / 96%); transform: translateY(-5px) rotate(-.35deg); }
-  .capability-card:nth-child(even):hover { transform: translateY(-5px) rotate(.35deg); }
+  .capability-card:hover { border-color: #4d516e; background: rgb(27 28 46 / 96%); transform: translateY(-5px); }
   .capability-card:hover .feature-icon svg { transform: rotate(-9deg) scale(1.12); }
   .release-item:hover { border-color: #4a4e6b; transform: translateX(5px); }
   .download-card:hover { border-color: #555a78; transform: translateY(-5px) rotate(-.25deg); }
@@ -398,7 +397,6 @@ main > section[id] { min-height: 100vh; min-height: 100dvh; }
   .capability-card .feature-icon { width: 36px; height: 36px; border-radius: 10px; }
   .capability-card .feature-icon svg { width: 17px; height: 17px; }
   .capability-meta { gap: 10px; }
-  .capability-meta .tag { font-size: 8px; }
   .capability-card > h3 { min-height: 2.4em; margin: 11px 0 0; font-size: 16px; line-height: 1.2; }
   .capability-card > p { margin-top: 7px; font-size: 11.5px; line-height: 1.38; }
   .capability-proof { margin-top: 11px; padding-top: 9px; gap: 4px; }
