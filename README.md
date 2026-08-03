@@ -33,6 +33,13 @@ Paket release juga memuat:
 - `SHA256SUMS.txt` untuk memeriksa integritas file.
 - `release-manifest.json` yang digunakan pemeriksa update aplikasi.
 
+Installer dan portable ZIP menyertakan dokumen versi 1.2.0 berikut:
+
+- `EULA.txt` — perjanjian lisensi pengguna akhir.
+- `PRIVACY.txt` — pemberitahuan pemrosesan dan penyimpanan data.
+- `QUICK_START.txt` — panduan instalasi, setup, Shop, serta export/import.
+- `THIRD_PARTY_NOTICES.txt` — daftar komponen, runtime, dan lisensi pihak ketiga.
+
 ## Instalasi
 
 1. Unduh installer dari halaman release resmi.
