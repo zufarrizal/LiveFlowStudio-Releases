@@ -219,16 +219,47 @@
     observeReveals(grid);
   };
 
-  const createFaqDetails = (faq, open) => {
-    const details = document.createElement("details");
-    details.className = "reveal";
-    details.open = open;
-    const summary = document.createElement("summary");
-    summary.append(document.createTextNode(faq.question), createIcon("chevron"));
+  const setFaqItemOpen = (item, open) => {
+    const button = item.querySelector(".faq-question");
+    const panel = item.querySelector(".faq-answer");
+    item.classList.toggle("open", open);
+    button?.setAttribute("aria-expanded", String(open));
+    panel?.setAttribute("aria-hidden", String(!open));
+    if (panel instanceof HTMLElement) panel.inert = !open;
+  };
+
+  const createFaqItem = (faq, open, id) => {
+    const item = document.createElement("article");
+    item.className = "faq-item reveal";
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "faq-question";
+    button.id = `${id}-button`;
+    button.setAttribute("aria-controls", `${id}-answer`);
+    const question = document.createElement("span");
+    question.textContent = faq.question;
+    button.append(question, createIcon("chevron"));
+
+    const panel = document.createElement("div");
+    panel.className = "faq-answer";
+    panel.id = `${id}-answer`;
+    panel.setAttribute("role", "region");
+    panel.setAttribute("aria-labelledby", button.id);
+    const answerInner = document.createElement("div");
+    answerInner.className = "faq-answer-inner";
     const answer = document.createElement("p");
     answer.textContent = faq.answer;
-    details.append(summary, answer);
-    return details;
+    answerInner.append(answer);
+    panel.append(answerInner);
+    item.append(button, panel);
+    setFaqItemOpen(item, open);
+
+    button.addEventListener("click", () => {
+      if (item.classList.contains("open")) return;
+      queryAll(".faq-item", item.parentElement).forEach((candidate) => setFaqItemOpen(candidate, candidate === item));
+    });
+    return item;
   };
 
   const renderFaq = (product) => {
@@ -249,7 +280,7 @@
       });
       list.replaceChildren();
       const matchingFaqs = product.faqs.filter((faq) => faq.category === categoryId);
-      matchingFaqs.forEach((faq, index) => list.append(createFaqDetails(faq, index === 0)));
+      matchingFaqs.forEach((faq, index) => list.append(createFaqItem(faq, index === 0, `faq-${categoryId}-${index + 1}`)));
       list.setAttribute("aria-busy", "false");
       observeReveals(list);
     };
