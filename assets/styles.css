@@ -79,8 +79,8 @@ svg { width: 1.25em; height: 1.25em; display: block; fill: none; stroke: current
 .button-small { min-height: 44px; padding: 9px 16px; font-size: 14px; }
 .button-full { width: 100%; }
 
-.hero { min-height: calc(100dvh - var(--header-height)); padding-block: 74px 92px; display: grid; align-items: center; overflow: clip; }
-.hero-grid { display: grid; grid-template-columns: minmax(0, .91fr) minmax(540px, 1.09fr); align-items: center; gap: 66px; }
+.hero { overflow: clip; }
+.hero-grid { min-height: calc(100dvh - var(--header-height)); padding-block: 74px 92px; display: grid; grid-template-columns: minmax(0, .91fr) minmax(540px, 1.09fr); align-items: center; gap: 66px; }
 .hero-grid > * { min-width: 0; }
 .hero-copy { position: relative; z-index: 2; width: 100%; max-width: 100%; }
 .release-pill { width: fit-content; min-height: 36px; padding: 6px 12px; display: flex; align-items: center; gap: 9px; border: 1px solid #3b3e58; border-radius: 999px; color: var(--muted); background: rgb(25 26 43 / 74%); box-shadow: var(--shadow-sm); font-size: 12px; font-weight: 700; }
@@ -300,8 +300,7 @@ svg { width: 1.25em; height: 1.25em; display: block; fill: none; stroke: current
   .primary-nav a:hover { background: var(--surface-bright); }
   .primary-nav a::after { display: none; }
   .nav-download { display: none; }
-  .hero { min-height: auto; padding-top: 62px; }
-  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .hero-grid { min-height: auto; padding-top: 62px; grid-template-columns: minmax(0, 1fr); gap: 48px; }
   .hero-copy { max-width: 700px; }
   .hero h1 { font-size: clamp(3.3rem, 10vw, 5.4rem); }
   .product-stage { width: min(720px, 100%); margin-inline: auto; }
@@ -321,7 +320,7 @@ svg { width: 1.25em; height: 1.25em; display: block; fill: none; stroke: current
   .page-width, .nav-shell { width: min(100% - 28px, var(--page-width)); }
   .section { padding-block: 72px; }
   .brand-copy { display: none; }
-  .hero { padding-block: 48px 66px; }
+  .hero-grid { padding-block: 48px 66px; }
   .release-pill { max-width: 100%; flex-wrap: wrap; }
   .hero h1 { margin-top: 22px; font-size: clamp(2.5rem, 11vw, 3.35rem); }
   .hero-lead { font-size: 16px; }
