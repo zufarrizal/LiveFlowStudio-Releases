@@ -1,8 +1,21 @@
 {
   "schemaVersion": 1,
-  "reviewedForVersion": "1.2.0",
-  "reviewedAt": "2026-08-03",
+  "reviewedForVersion": "1.2.1",
+  "reviewedAt": "2026-08-07",
   "releaseCopy": {
+    "1.2.1": {
+      "summary": "This release makes manual Action and gift testing safer when a workflow needs focus on another desktop application, while making the AutoIt requirement visible where keystrokes are configured.",
+      "highlights": [
+        {
+          "title": "Five-second test countdown",
+          "description": "Test Action and Specific Gift simulation now wait five seconds with visible feedback before entering the production pipeline."
+        },
+        {
+          "title": "Clear AutoIt requirement",
+          "description": "The Keystroke editor now explains the AutoIt requirement and opens its official download page directly."
+        }
+      ]
+    },
     "1.2.0": {
       "summary": "This release makes daily control faster, configuration moves safer, and Zal Digital products easier to discover without moving transactions into LiveFlow Studio.",
       "highlights": [
@@ -93,7 +106,7 @@
     {
       "category": "getting-started",
       "question": "What does LiveFlow Studio require?",
-      "answer": "LiveFlow Studio targets Windows 10 or Windows 11 x64, requires Microsoft Edge WebView2, and needs internet access for login and network-backed features. Minecraft also requires a compatible server or plugin when that integration is used."
+      "answer": "LiveFlow Studio targets Windows 10 or Windows 11 x64, requires Microsoft Edge WebView2, and needs internet access for login and network-backed features. Minecraft requires a compatible server or plugin, while Keystroke workflows require AutoIt from its official website."
     },
     {
       "category": "getting-started",
@@ -134,6 +147,16 @@
       "category": "actions",
       "question": "Can multiple Actions run at the same time?",
       "answer": "Non-keystroke Actions and their effects can start concurrently. Actions containing keystrokes use one global sequential queue to prevent competing keyboard automation. The Live Execution Log temporarily reports job and per-effect results."
+    },
+    {
+      "category": "actions",
+      "question": "Why do Test Action and Specific Gift simulation wait five seconds?",
+      "answer": "The countdown gives you time to focus the intended desktop application before an Action runs. The delay is enforced by the backend, while other Event Simulator signals continue to run immediately."
+    },
+    {
+      "category": "actions",
+      "question": "What is required before using a Keystroke Action?",
+      "answer": "Install AutoIt from its official download page, confirm that Emergency Stop is not active, and use Required foreground app when the shortcut must only reach one application. LiveFlow Studio does not bundle or install AutoIt automatically."
     },
     {
       "category": "overlays",

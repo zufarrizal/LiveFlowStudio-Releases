@@ -8,7 +8,7 @@ Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi 1.2.0 menambahkan Shop Zal Digital dengan checkout dan Store Support melalui bot Telegram, kontrol Action langsung dari tabel, refresh gift catalog dari header, serta import konfigurasi yang lebih aman dan portabel.
+Versi 1.2.1 menambahkan delay lima detik dengan countdown pada Test Action dan simulasi Specific Gift agar pengguna sempat memindahkan fokus ke aplikasi target. Editor Keystroke juga menampilkan AutoIt sebagai kebutuhan dengan tombol menuju halaman unduhan resmi.
 
 Export konfigurasi tetap berupa satu file JSON tanpa menyertakan file audio, identitas akun, credential, data realtime, atau progress sesi. Ketika import, audio MyInstants yang belum tersedia akan diunduh otomatis dari sumber resminya setelah pengguna menyetujui preflight. Aplikasi juga membuat backup otomatis sebelum konfigurasi diganti.
 
@@ -20,6 +20,8 @@ Export konfigurasi tetap berupa satu file JSON tanpa menyertakan file audio, ide
 - Pengaturan durasi, status Action, dan efek aktif langsung dari tabel Actions.
 - Export/import konfigurasi JSON lintas akun dengan validasi, rollback, dan pemulihan audio MyInstants.
 - Gift catalog dapat diperbarui dari header dan otomatis diperbarui setelah import berhasil.
+- Test Action dan simulasi Specific Gift menggunakan delay lima detik dengan feedback countdown.
+- Editor Keystroke menyediakan notice dan tautan unduh AutoIt resmi.
 
 ## Unduh
 
@@ -33,7 +35,7 @@ Paket release juga memuat:
 - `SHA256SUMS.txt` untuk memeriksa integritas file.
 - `release-manifest.json` yang digunakan pemeriksa update aplikasi.
 
-Installer dan portable ZIP menyertakan dokumen versi 1.2.0 berikut:
+Installer dan portable ZIP menyertakan dokumen versi 1.2.1 berikut:
 
 - `EULA.txt` — perjanjian lisensi pengguna akhir.
 - `PRIVACY.txt` — pemberitahuan pemrosesan dan penyimpanan data.
@@ -50,7 +52,7 @@ Installer dan portable ZIP menyertakan dokumen versi 1.2.0 berikut:
 Contoh verifikasi melalui PowerShell:
 
 ```powershell
-Get-FileHash .\LiveFlowStudio-Setup-1.2.0-x64.exe -Algorithm SHA256
+Get-FileHash .\LiveFlowStudio-Setup-1.2.1-x64.exe -Algorithm SHA256
 ```
 
 ## Pembaruan otomatis
@@ -63,6 +65,7 @@ Setelah login, LiveFlow Studio memeriksa release stabil terbaru. Aplikasi hanya 
 - Microsoft Edge WebView2 Runtime.
 - Koneksi internet untuk login, TikTok LIVE, gift catalog, Shop, Saweria, Sound Library, dan cloud overlay.
 - Akun LiveFlow Studio yang masih aktif.
+- AutoIt yang sudah dipasang jika menggunakan Keystroke Action: [unduh dari situs resmi](https://www.autoitscript.com/site/autoit/downloads/).
 
 ## Keamanan distribusi
 
