@@ -1,6 +1,6 @@
 # LiveFlow Studio
 
-![Manual bootstrap](https://img.shields.io/badge/Manual_bootstrap-1.3.0-F59E0B)
+![Latest](https://img.shields.io/badge/Latest-1.3.0-22C55E)
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-1674CE?logo=windows11&logoColor=white)
 ![Architecture](https://img.shields.io/badge/Architecture-x64-38C8ED)
 
@@ -8,7 +8,7 @@ Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi manual-bootstrap 1.3.0 memperkuat autentikasi dan distribusi update, serta memisahkan Goal Overlay, Goal Settings, progress, dan binding Action untuk setiap preset Actions & Events. Manifest release sekarang dilindungi signature Ed25519 dan juga mengikat checksum ZIP portable. Karena paket belum memiliki Authenticode komersial, 1.3.0 dipublikasikan sebagai prerelease manual dan tidak menggantikan stable `latest` 1.2.1.
+Versi stable 1.3.0 memperkuat autentikasi dan distribusi update, memisahkan Goal Overlay, Goal Settings, progress, dan binding Action untuk setiap preset Actions & Events, serta menghapus Timer Rules yang tidak memiliki alur produk lengkap. Manifest release dilindungi signature Ed25519 dan juga mengikat checksum ZIP portable. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher.
 
 Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyertakan file audio, identitas akun, credential, identitas internal preset, data realtime, atau progress sesi. Ketika import, konfigurasi diterapkan ke preset tujuan yang aktif, referensi Action di-remap, audio MyInstants yang belum tersedia diunduh otomatis setelah preflight disetujui, dan aplikasi membuat backup sebelum konfigurasi diganti.
 
@@ -28,7 +28,7 @@ Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyerta
 
 ## Unduh
 
-Buka [manual-bootstrap release 1.3.0](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.3.0), lalu pilih salah satu:
+Buka [release terbaru](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest), lalu pilih salah satu:
 
 - `LiveFlowStudio-Setup-<version>-x64.exe` untuk instalasi normal.
 - `LiveFlowStudio-<version>-windows-x64.zip` untuk versi portable.
@@ -63,7 +63,7 @@ Get-FileHash .\LiveFlowStudio-Setup-1.3.0-x64.exe -Algorithm SHA256
 
 LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset dari repository ini, memverifikasi signature Ed25519 manifest beserta checksum installer, lalu meminta persetujuan pengguna sebelum menjalankannya.
 
-> **Upgrade pertama dari 1.2.1:** verifier Ed25519 belum tersedia pada aplikasi lama dan paket 1.3.0 belum memiliki Authenticode komersial. Unduh 1.3.0 secara manual dari halaman release resmi, cocokkan SHA-256 melalui kanal owner, tutup 1.2.1, lalu jalankan installer baru. Jangan mengandalkan tombol update otomatis 1.2.1 untuk transisi bootstrap ini.
+> **Upgrade pertama dari 1.2.1:** walaupun 1.3.0 tersedia sebagai Latest, verifier Ed25519 belum tersedia pada aplikasi lama dan paket belum memiliki Authenticode komersial. Unduh 1.3.0 secara manual dari halaman release resmi, cocokkan SHA-256 melalui kanal owner, tutup 1.2.1, lalu jalankan installer baru. Jangan mengandalkan tombol update otomatis 1.2.1 untuk mengautentikasi transisi bootstrap ini.
 
 ## Persyaratan
 
