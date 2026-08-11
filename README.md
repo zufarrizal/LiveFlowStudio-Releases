@@ -1,7 +1,7 @@
 # LiveFlow Studio
 
 ![Stable](https://img.shields.io/badge/Stable-1.3.0-22C55E)
-![Prerelease](https://img.shields.io/badge/Prerelease-1.3.1-38C8ED)
+![Manual Release](https://img.shields.io/badge/Manual%20Release-1.3.1-38C8ED)
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-1674CE?logo=windows11&logoColor=white)
 ![Architecture](https://img.shields.io/badge/Architecture-x64-38C8ED)
 
@@ -9,7 +9,7 @@ Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi 1.3.1 dipublikasikan sebagai prerelease dan memperbaiki Repeat Gift Combo agar seluruh delta gift yang sudah diterima tetap dijalankan, memberi pacing output Action tetap 0,5 detik, menambahkan simulasi combo 1-100 gift dengan interval input acak 0,2-1,0 detik, serta menjaga audio dan Live Execution Log tetap bekerja ketika jendela diminimize. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher; stable Latest tetap 1.3.0.
+Versi 1.3.1 dipublikasikan sebagai release manual non-Latest dan memperbaiki Repeat Gift Combo agar seluruh delta gift yang sudah diterima tetap dijalankan, memberi pacing output Action tetap 0,5 detik, menambahkan simulasi combo 1-100 gift dengan interval input acak 0,2-1,0 detik, serta menjaga audio dan Live Execution Log tetap bekerja ketika jendela diminimize. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher; stable Latest tetap 1.3.0.
 
 Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyertakan file audio, identitas akun, credential, identitas internal preset, data realtime, atau progress sesi. Ketika import, konfigurasi diterapkan ke preset tujuan yang aktif, referensi Action di-remap, audio MyInstants yang belum tersedia diunduh otomatis setelah preflight disetujui, dan aplikasi membuat backup sebelum konfigurasi diganti.
 
@@ -31,7 +31,7 @@ Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyerta
 
 ## Unduh
 
-Buka [prerelease 1.3.1](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.3.1) atau [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest), lalu pilih salah satu:
+Buka [release manual 1.3.1](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.3.1) atau [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest), lalu pilih salah satu:
 
 - `LiveFlowStudio-Setup-<version>-x64.exe` untuk instalasi normal.
 - `LiveFlowStudio-<version>-windows-x64.zip` untuk versi portable.
@@ -64,7 +64,7 @@ Get-FileHash .\LiveFlowStudio-Setup-1.3.1-x64.exe -Algorithm SHA256
 
 ## Pembaruan otomatis
 
-LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable dari repository ini, memverifikasi signature Ed25519 manifest beserta checksum installer, lalu meminta persetujuan pengguna sebelum menjalankannya. Prerelease tidak ditawarkan oleh pemeriksaan update otomatis.
+LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable Latest dari repository ini, memverifikasi signature Ed25519 manifest beserta checksum installer, lalu meminta persetujuan pengguna sebelum menjalankannya. Release manual non-Latest tidak ditawarkan oleh pemeriksaan update otomatis.
 
 > **Upgrade pertama dari 1.2.1:** walaupun 1.3.0 tersedia sebagai Latest, verifier Ed25519 belum tersedia pada aplikasi lama dan paket belum memiliki Authenticode komersial. Unduh 1.3.0 secara manual dari halaman release resmi, cocokkan SHA-256 melalui kanal owner, tutup 1.2.1, lalu jalankan installer baru. Jangan mengandalkan tombol update otomatis 1.2.1 untuk mengautentikasi transisi bootstrap ini.
 
