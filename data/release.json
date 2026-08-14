@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
   "version": "1.3.2",
-  "publishedAt": "2026-08-14T06:33:04Z",
+  "publishedAt": "2026-08-14T08:20:28Z",
   "releaseUrl": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.3.2",
   "checksumUrl": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/download/v1.3.2/SHA256SUMS.txt",
   "assets": {
     "installer": {
       "name": "LiveFlowStudio-Setup-1.3.2-x64.exe",
       "url": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/download/v1.3.2/LiveFlowStudio-Setup-1.3.2-x64.exe",
-      "size": 10689527,
-      "sha256": "dbc5519230d787130cc92e046f66687ca665122ff97769277cdc09c0bebb4b5a"
+      "size": 10692662,
+      "sha256": "807c695f68f5eaf61df06ca229663c21b1aef33c142c6278a0b5683750799f35"
     },
     "portable": {
       "name": "LiveFlowStudio-1.3.2-windows-x64.zip",
       "url": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/download/v1.3.2/LiveFlowStudio-1.3.2-windows-x64.zip",
-      "size": 8920442,
-      "sha256": "278c76dc21dd50ed72bb3c8adde0dc55a5d9f779a3bb25f0b1bf1c4db9035e8b"
+      "size": 8922909,
+      "sha256": "4d80f8b5fa9d8bf6a4aef05e85229e154ea23b35854ee2b31ab06aeaacad5564"
     }
   }
 }
