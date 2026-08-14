@@ -8,7 +8,7 @@ Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi stable Latest 1.3.2 membuat **Repeat by Gift Combo** aktif secara default pada Action baru dan menambahkan pilihan **Add 0.5 delay** yang default-nya nonaktif. Pengguna dapat menjalankan combo tanpa jeda tambahan atau mengaktifkan pacing 0,5 detik per Action sesuai kebutuhan. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher.
+Versi stable Latest 1.3.2 membuat **Repeat by Gift Combo** aktif secara default pada Action baru dan menambahkan satu checkbox global **Add 0.5 delay** di atas tabel Actions. Checkbox ini nonaktif secara default dan mengatur pacing seluruh Action combo pada preset aktif. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher.
 
 Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyertakan file audio, identitas akun, credential, identitas internal preset, data realtime, atau progress sesi. Ketika import, konfigurasi diterapkan ke preset tujuan yang aktif, referensi Action di-remap, audio MyInstants yang belum tersedia diunduh otomatis setelah preflight disetujui, dan aplikasi membuat backup sebelum konfigurasi diganti.
 
@@ -21,7 +21,7 @@ Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyerta
 - Export/import konfigurasi JSON lintas akun dengan validasi, rollback, dan pemulihan audio MyInstants.
 - Gift catalog dapat diperbarui dari header dan otomatis diperbarui setelah import berhasil.
 - Test Action dan simulasi Specific Gift menggunakan delay lima detik dengan feedback countdown.
-- Test Action dapat menjalankan batch 1-100 kali. Gift Simulator mengirim satu combo 1-100 gift dengan jarak input acak 0,2-1,0 detik; pacing tambahan 0,5 detik dapat diatur per Action.
+- Test Action dapat menjalankan batch 1-100 kali. Gift Simulator mengirim satu combo 1-100 gift dengan jarak input acak 0,2-1,0 detik; pacing tambahan 0,5 detik dapat diatur secara global per preset.
 - Audio lokal diputar oleh player Windows backend dan Live Execution Log melakukan resync setelah jendela dipulihkan.
 - Editor Keystroke menyediakan notice dan tautan unduh AutoIt resmi.
 - Goal Overlay dan pengaturannya tersimpan secara independen untuk setiap preset.
