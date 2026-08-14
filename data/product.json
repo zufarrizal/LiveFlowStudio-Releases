@@ -4,7 +4,7 @@
   "reviewedAt": "2026-08-14",
   "releaseCopy": {
     "1.3.2": {
-      "summary": "This release enables Repeat by Gift Combo for new Actions by default and makes the additional 0.5-second pacing an optional per-Action setting.",
+      "summary": "This release enables Repeat by Gift Combo for new Actions by default and adds one preset-wide control for optional 0.5-second pacing.",
       "highlights": [
         {
           "title": "Repeat enabled by default",
@@ -12,7 +12,7 @@
         },
         {
           "title": "Optional 0.5-second pacing",
-          "description": "Add 0.5 delay starts disabled and can be enabled only for Actions that need slower combo output."
+          "description": "One Add 0.5 delay checkbox above the Actions table controls combo pacing for every repeating Action in the active preset."
         },
         {
           "title": "Cleaner portable builds",
