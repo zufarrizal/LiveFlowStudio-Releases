@@ -1,8 +1,42 @@
 {
   "schemaVersion": 1,
-  "reviewedForVersion": "1.2.1",
-  "reviewedAt": "2026-08-07",
+  "reviewedForVersion": "1.3.2",
+  "reviewedAt": "2026-08-14",
   "releaseCopy": {
+    "1.3.2": {
+      "summary": "This release enables Repeat by Gift Combo for new Actions by default and makes the additional 0.5-second pacing an optional per-Action setting.",
+      "highlights": [
+        {
+          "title": "Repeat enabled by default",
+          "description": "New Actions repeat accepted gift combos automatically while preserving cooldown protection for new combos."
+        },
+        {
+          "title": "Optional 0.5-second pacing",
+          "description": "Add 0.5 delay starts disabled and can be enabled only for Actions that need slower combo output."
+        },
+        {
+          "title": "Cleaner portable builds",
+          "description": "The local portable build now keeps one versioned executable instead of duplicate versioned and unversioned files."
+        }
+      ]
+    },
+    "1.3.1": {
+      "summary": "This release makes gift-combo execution reliable under cooldown, adds realistic repeated testing, and keeps local audio and execution feedback resilient while the window is minimized.",
+      "highlights": [
+        {
+          "title": "Reliable gift-combo completion",
+          "description": "An accepted repeat combo completes every new gift delta with fixed 0.5-second Action pacing while new combos still respect cooldown."
+        },
+        {
+          "title": "Realistic repeated testing",
+          "description": "Test Actions in batches and simulate one 1-100 gift combo with randomized 0.2-1.0 second input intervals."
+        },
+        {
+          "title": "Minimize-safe execution feedback",
+          "description": "Backend Windows audio playback and bounded execution-history resync keep Action results visible after the app window is restored."
+        }
+      ]
+    },
     "1.2.1": {
       "summary": "This release makes manual Action and gift testing safer when a workflow needs focus on another desktop application, while making the AutoIt requirement visible where keystrokes are configured.",
       "highlights": [
@@ -186,7 +220,7 @@
     {
       "category": "data",
       "question": "Can a configuration be imported into another account?",
-      "answer": "Yes. Import preserves the destination identity and remaps Action, Event, and Timer IDs with their references. It creates an automatic backup, disables global Actions, and leaves sensitive imported Actions disabled until reviewed."
+      "answer": "Yes. Import preserves the destination identity and remaps Action and Event IDs with their references. It creates an automatic backup, disables global Actions, and leaves sensitive imported Actions disabled until reviewed. Older Timer data is safely ignored."
     },
     {
       "category": "updates",
