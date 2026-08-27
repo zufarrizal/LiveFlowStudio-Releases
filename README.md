@@ -1,6 +1,6 @@
 # LiveFlow Studio
 
-![Stable](https://img.shields.io/badge/Stable-1.4.0-22C55E)
+![Stable](https://img.shields.io/badge/Stable-1.4.1-22C55E)
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-1674CE?logo=windows11&logoColor=white)
 ![Architecture](https://img.shields.io/badge/Architecture-x64-38C8ED)
 
@@ -8,14 +8,14 @@ Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi stable Latest 1.4.0 menambahkan pergantian TikTok username mandiri dengan binding satu identitas instalasi + satu IP publik, bridge lokal Host Coins Counter, kontrol Hide boxes/Hide text pada Event List Box, serta placeholder Minecraft yang konsisten untuk TikTok, Saweria, dan MediaShare. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher.
+Versi stable Latest 1.4.1 membuat setiap Action effect dapat berjalan mandiri, mengizinkan device yang sama berpindah IP atau VPN tanpa reset, dan menyediakan pemeriksaan, download, serta pemasangan update langsung dari layar login. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher.
 
 Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyertakan file audio, identitas akun, credential, identitas internal preset, data realtime, atau progress sesi. Ketika import, konfigurasi diterapkan ke preset tujuan yang aktif, referensi Action di-remap, audio MyInstants yang belum tersedia diunduh otomatis setelah preflight disetujui, dan aplikasi membuat backup sebelum konfigurasi diganti.
 
 ## Fitur utama
 
 - Watcher TikTok LIVE otomatis dengan Action untuk gift, follow, share, subscribe, dan komentar.
-- Satu email memiliki satu TikTok username aktif yang dapat diganti dari aplikasi; login dibatasi ke satu identitas instalasi dan satu IP publik sampai Admin mereset binding.
+- Satu email memiliki satu TikTok username aktif yang dapat diganti dari aplikasi; login dibatasi ke satu identitas instalasi sampai Admin mereset binding. Device yang sama tetap sah ketika IP publik atau VPN berubah.
 - Integrasi Saweria, Minecraft, keystroke, audio lokal, media overlay, Goal, dan widget realtime.
 - Bridge Host Coins Counter lokal membagikan lifecycle room dan gift coin final tanpa membuat watcher TikTok kedua.
 - Event List Box dapat menyembunyikan box visual/caption atau caption teks per preset pada preview dan PNG.
@@ -25,15 +25,16 @@ Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyerta
 - Gift catalog dapat diperbarui dari header dan otomatis diperbarui setelah import berhasil.
 - Test Action dan simulasi Specific Gift menggunakan delay lima detik dengan feedback countdown.
 - Test Action dapat menjalankan batch 1-100 kali. Gift Simulator mengirim satu combo 1-100 gift dengan jarak input acak 0,2-1,0 detik; pacing tambahan 0,5 detik dapat diatur secara global per preset.
-- Audio lokal diputar oleh player Windows backend dan Live Execution Log melakukan resync setelah jendela dipulihkan.
+- Setiap effect dapat menjadi satu-satunya effect aktif; audio lokal diputar mandiri oleh player Windows backend dan Live Execution Log melakukan resync setelah jendela dipulihkan.
 - Editor Keystroke menyediakan notice dan tautan unduh AutoIt resmi.
 - Goal Overlay dan pengaturannya tersimpan secara independen untuk setiap preset.
 - Pesan autentikasi dan diagnostik disanitasi agar URL internal, token, dan credential tidak tampil di UI.
 - Manifest Ed25519 dan high-water anti-rollback melindungi updater pada versi 1.3.0 dan sesudahnya.
+- Pemeriksaan, download, dan pemasangan update tersedia dari layar login tanpa memerlukan akun Supabase.
 
 ## Unduh
 
-Buka [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest) atau [halaman versi 1.4.0](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.4.0), lalu pilih salah satu:
+Buka [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest) atau [halaman versi 1.4.1](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.4.1), lalu pilih salah satu:
 
 - `LiveFlowStudio-Setup-<version>-x64.exe` untuk instalasi normal.
 - `LiveFlowStudio-<version>-windows-x64.zip` untuk versi portable.
@@ -44,7 +45,7 @@ Paket release juga memuat:
 - `release-manifest.json` yang mengikat metadata dan checksum installer/portable.
 - `release-manifest-signatures.json` untuk memverifikasi manifest menggunakan Ed25519.
 
-Installer dan portable ZIP 1.4.0 menyertakan dokumen versi berikut:
+Installer dan portable ZIP 1.4.1 menyertakan dokumen versi berikut:
 
 - `EULA.txt` — perjanjian lisensi pengguna akhir.
 - `PRIVACY.txt` — pemberitahuan pemrosesan dan penyimpanan data.
@@ -61,12 +62,12 @@ Installer dan portable ZIP 1.4.0 menyertakan dokumen versi berikut:
 Contoh verifikasi melalui PowerShell:
 
 ```powershell
-Get-FileHash .\LiveFlowStudio-Setup-1.4.0-x64.exe -Algorithm SHA256
+Get-FileHash .\LiveFlowStudio-Setup-1.4.1-x64.exe -Algorithm SHA256
 ```
 
 ## Pembaruan otomatis
 
-LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable Latest dari repository ini, memverifikasi signature Ed25519 manifest beserta checksum installer, lalu meminta persetujuan pengguna sebelum menjalankannya. Karena 1.4.0 adalah stable Latest, versi ini ditawarkan oleh pemeriksaan update otomatis.
+LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable Latest dari repository ini, memverifikasi signature Ed25519 manifest beserta checksum installer, lalu meminta persetujuan pengguna sebelum menjalankannya. Karena 1.4.1 adalah stable Latest, versi ini ditawarkan oleh pemeriksaan update otomatis; pada 1.4.1 pemeriksaan dan pemasangan tersedia langsung dari layar login.
 
 > **Upgrade pertama dari 1.2.1:** walaupun 1.3.0 tersedia sebagai Latest, verifier Ed25519 belum tersedia pada aplikasi lama dan paket belum memiliki Authenticode komersial. Unduh 1.3.0 secara manual dari halaman release resmi, cocokkan SHA-256 melalui kanal owner, tutup 1.2.1, lalu jalankan installer baru. Jangan mengandalkan tombol update otomatis 1.2.1 untuk mengautentikasi transisi bootstrap ini.
 
