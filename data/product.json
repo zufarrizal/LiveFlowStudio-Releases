@@ -1,8 +1,25 @@
 {
   "schemaVersion": 1,
-  "reviewedForVersion": "1.4.0",
+  "reviewedForVersion": "1.4.1",
   "reviewedAt": "2026-08-27",
   "releaseCopy": {
+    "1.4.1": {
+      "summary": "This release makes every Action effect independently usable, keeps a verified device authorized when its public IP or VPN changes, and makes trusted application updates available before Supabase login.",
+      "highlights": [
+        {
+          "title": "Independent Action effects",
+          "description": "Run local sound, visual, Goal, Minecraft, keystroke, or other supported effects on their own without disabled effect settings blocking the Action."
+        },
+        {
+          "title": "Device-first account binding",
+          "description": "The same verified installation can move between Wi-Fi, ISP, public IP, or VPN while a different device still requires an Admin binding reset."
+        },
+        {
+          "title": "Trusted updates before login",
+          "description": "Check, download, and install updates from the login screen while retaining Ed25519 manifest, anti-rollback, host, size, and SHA-256 verification."
+        }
+      ]
+    },
     "1.4.0": {
       "summary": "This release adds self-service TikTok username changes, one-installation and one-public-IP account binding, a local Host Coins Counter bridge, richer Event List Box exports, and consistently rendered Minecraft placeholders with single-line guards.",
       "highlights": [
@@ -162,7 +179,7 @@
     {
       "category": "getting-started",
       "question": "Can I use the application without an active account?",
-      "answer": "No. Access is invite-only. The account must be active, claimed by its approved installation and public IP, and have a unique TikTok username before LiveFlow Studio can start its production services. The account owner can change that username from Setup without creating a new login."
+      "answer": "Production features are invite-only, but trusted application updates remain available from the login screen. The account must be active, claimed by its approved installation, and have a unique TikTok username before LiveFlow Studio can start its production services. Public-IP or VPN changes on the same verified installation do not require a reset."
     },
     {
       "category": "getting-started",
@@ -187,7 +204,7 @@
     {
       "category": "actions",
       "question": "What can an Action run?",
-      "answer": "An Action can use animation, picture/GIF, video file, YouTube, alert, audio, Minecraft command, keystroke, Goal update, and Overlay Screen effects that have been configured in the editor."
+      "answer": "An Action can use animation, picture/GIF, video file, YouTube, alert, audio, Minecraft command, keystroke, Goal update, and Overlay Screen effects that have been configured in the editor. Any supported effect can be the only active effect in an Action."
     },
     {
       "category": "actions",
@@ -242,7 +259,7 @@
     {
       "category": "updates",
       "question": "How are application updates verified?",
-      "answer": "LiveFlow Studio only accepts installer assets from the official public release repository. The installer is downloaded to a local cache and checked against the published SHA-256 manifest before Windows is allowed to open it."
+      "answer": "LiveFlow Studio checks, downloads, and installs updates from the login screen without requiring a Supabase account. It only accepts assets from the official public release repository and verifies the Ed25519-signed manifest, anti-rollback sequence, download host, size, and SHA-256 before Windows is allowed to open the installer."
     },
     {
       "category": "updates",
