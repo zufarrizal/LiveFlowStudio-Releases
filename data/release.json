@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "version": "1.4.1",
-  "publishedAt": "2026-08-27T16:18:52Z",
-  "releaseUrl": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.4.1",
-  "checksumUrl": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/download/v1.4.1/SHA256SUMS.txt",
+  "version": "1.4.2",
+  "publishedAt": "2026-08-29T01:52:50Z",
+  "releaseUrl": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.4.2",
+  "checksumUrl": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/download/v1.4.2/SHA256SUMS.txt",
   "assets": {
     "installer": {
-      "name": "LiveFlowStudio-Setup-1.4.1-x64.exe",
-      "url": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/download/v1.4.1/LiveFlowStudio-Setup-1.4.1-x64.exe",
-      "size": 10724496,
-      "sha256": "5d2bda633bc305c2824d5c3823f3b8423d1c392f8b309e48ff6d2d522b8e9dcb"
+      "name": "LiveFlowStudio-Setup-1.4.2-x64.exe",
+      "url": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/download/v1.4.2/LiveFlowStudio-Setup-1.4.2-x64.exe",
+      "size": 10725611,
+      "sha256": "9347356a860349e2dad316273da256510d84e499ac0e8724e29a93797ec862ee"
     },
     "portable": {
-      "name": "LiveFlowStudio-1.4.1-windows-x64.zip",
-      "url": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/download/v1.4.1/LiveFlowStudio-1.4.1-windows-x64.zip",
-      "size": 8949750,
-      "sha256": "d8de2c091d8c917206790e2434d13246e480e639e956007c95020d627396e455"
+      "name": "LiveFlowStudio-1.4.2-windows-x64.zip",
+      "url": "https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/download/v1.4.2/LiveFlowStudio-1.4.2-windows-x64.zip",
+      "size": 8951277,
+      "sha256": "b94dc7c6e5a3a2d5d76c9584f251f8513170d08c26c3718e614a62b403bce1a9"
     }
   }
 }
