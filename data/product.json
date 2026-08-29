@@ -1,10 +1,31 @@
 {
   "schemaVersion": 1,
-  "reviewedForVersion": "1.4.1",
-  "reviewedAt": "2026-08-27",
+  "reviewedForVersion": "1.4.2",
+  "reviewedAt": "2026-08-29",
   "releaseCopy": {
+    "1.4.2": {
+      "summary": "This release keeps production wording focused on user outcomes, filters implementation details from visible status and error text, and shows the installed version on Support.",
+      "highlights": [
+        {
+          "title": "Clearer production language",
+          "description": "Screens, connection states, and public release material now explain what users need to know without exposing implementation details."
+        },
+        {
+          "title": "Safer visible diagnostics",
+          "description": "Dynamic errors, tooltips, notifications, and execution details are filtered before they appear in the application."
+        },
+        {
+          "title": "Version ready for support",
+          "description": "The Support page shows the installed application version directly from build metadata for faster issue reporting."
+        },
+        {
+          "title": "Straightforward ServerTap setup",
+          "description": "ServerTap Key starts with change_me, remains visible, and stays filled after settings are saved."
+        }
+      ]
+    },
     "1.4.1": {
-      "summary": "This release makes every Action effect independently usable, keeps a verified device authorized when its public IP or VPN changes, and makes trusted application updates available before Supabase login.",
+      "summary": "This release makes every Action effect independently usable, keeps a verified device authorized when its network changes, and makes trusted application updates available before login.",
       "highlights": [
         {
           "title": "Independent Action effects",
@@ -12,11 +33,11 @@
         },
         {
           "title": "Device-first account binding",
-          "description": "The same verified installation can move between Wi-Fi, ISP, public IP, or VPN while a different device still requires an Admin binding reset."
+          "description": "The same verified installation can move between Wi-Fi, ISP, or VPN while a different device still requires an Admin reset."
         },
         {
           "title": "Trusted updates before login",
-          "description": "Check, download, and install updates from the login screen while retaining Ed25519 manifest, anti-rollback, host, size, and SHA-256 verification."
+          "description": "Check, download, and install updates from the login screen with trusted release and file-integrity verification."
         }
       ]
     },
@@ -67,7 +88,7 @@
         },
         {
           "title": "Minimize-safe execution feedback",
-          "description": "Backend Windows audio playback and bounded execution-history resync keep Action results visible after the app window is restored."
+          "description": "Reliable Windows audio playback and restored execution feedback keep Action results visible after the app window is restored."
         }
       ]
     },
@@ -120,10 +141,10 @@
       "id": "automation",
       "icon": "sliders",
       "accent": "violet",
-      "label": "RULE ENGINE",
+      "label": "EVENT AUTOMATION",
       "title": "Actions and Events that stay understandable",
       "summary": "Build up to ten account-scoped presets with cooldowns, gift-combo handling, priority rules, random Actions, and multiple-Action routing.",
-      "proof": ["Inline duration and enable controls", "Event Simulator", "Transient execution log"]
+      "proof": ["Inline duration and enable controls", "Event Simulator", "Recent execution feedback"]
     },
     {
       "id": "outputs",
@@ -132,16 +153,16 @@
       "label": "ACTION OUTPUTS",
       "title": "Coordinate screen effects and local PC actions",
       "summary": "Run animation, picture/GIF, video, YouTube, alert, audio, Minecraft command, keystroke, and Goal effects from the same Action.",
-      "proof": ["Parallel non-keystroke effects", "Per-effect status controls", "Bounded execution dispatcher"]
+      "proof": ["Parallel non-keystroke effects", "Per-effect status controls", "Controlled execution"]
     },
     {
       "id": "overlays",
       "icon": "screen",
       "accent": "green",
-      "label": "REALTIME OVERLAYS",
+      "label": "LIVE OVERLAYS",
       "title": "Browser Sources for screens, Goals, and widgets",
       "summary": "Use eight Overlay Screens, metric Goals, and session widgets for Gift Feed, Chat, Top Gifter, and Top Liker in OBS or TikTok LIVE Studio.",
-      "proof": ["Permanent HTTPS URLs", "Account-scoped appearance settings", "Room-aware session reset"]
+      "proof": ["Permanent HTTPS URLs", "Per-account appearance settings", "Fresh state for every LIVE room"]
     },
     {
       "id": "portability",
@@ -150,7 +171,7 @@
       "label": "PORTABLE CONFIG",
       "title": "Move setups without embedding private media",
       "summary": "Export one JSON configuration without credentials, account identity, session progress, or audio files. Import uses preflight, backup, rollback, and approved MyInstants recovery.",
-      "proof": ["Cross-account ID remapping", "SHA-256 preflight checks", "Missing local media disabled safely"]
+      "proof": ["Safe cross-account transfer", "File-integrity checks", "Missing local media disabled safely"]
     },
     {
       "id": "local-first",
@@ -158,8 +179,8 @@
       "accent": "orange",
       "label": "LOCAL-FIRST CONTROL",
       "title": "Operational settings stay on the Windows device",
-      "summary": "SQLite stores account-scoped setup data while Windows Credential Manager protects supported integration secrets. Raw LIVE and execution logs remain temporary.",
-      "proof": ["No persistent event history", "Local media library", "Authenticated cloud relay only when needed"]
+      "summary": "Operational settings and supported integration credentials use protected storage on this device. Raw LIVE and execution activity remains temporary.",
+      "proof": ["No persistent event history", "Local media library", "Protected online delivery only when needed"]
     }
   ],
   "faqCategories": [
@@ -174,7 +195,7 @@
     {
       "category": "getting-started",
       "question": "What does LiveFlow Studio require?",
-      "answer": "LiveFlow Studio targets Windows 10 or Windows 11 x64, requires Microsoft Edge WebView2, and needs internet access for login and network-backed features. Minecraft requires a compatible server or plugin, while Keystroke workflows require AutoIt from its official website."
+      "answer": "LiveFlow Studio targets Windows 10 or Windows 11 x64 and needs internet access for login and online features. Minecraft requires a compatible server or plugin, while Keystroke workflows require AutoIt from its official website."
     },
     {
       "category": "getting-started",
@@ -194,7 +215,7 @@
     {
       "category": "connections",
       "question": "Do I need to connect TikTok LIVE manually every time?",
-      "answer": "No. After login, the LIVE watcher checks the authorized username automatically and switches to the realtime listener when a valid active room is found. Check LIVE now is a manual recovery action, not a required connection step."
+      "answer": "No. After login, LiveFlow Studio checks the approved username automatically and connects when a valid active room is found. Check LIVE now is a manual recovery action, not a required connection step."
     },
     {
       "category": "connections",
@@ -219,7 +240,7 @@
     {
       "category": "actions",
       "question": "Why do Test Action and Specific Gift simulation wait five seconds?",
-      "answer": "The countdown gives you time to focus the intended desktop application before an Action runs. The delay is enforced by the backend, while other Event Simulator signals continue to run immediately."
+      "answer": "The countdown gives you time to focus the intended desktop application before an Action runs. Other Event Simulator signals continue to run immediately."
     },
     {
       "category": "actions",
@@ -228,18 +249,18 @@
     },
     {
       "category": "overlays",
-      "question": "Which realtime overlays are available?",
+      "question": "Which live overlays are available?",
       "answer": "The production application supports eight Overlay Screens, Goal Overlays, and Overlay Gallery widgets for Gift Feed, Chat, Top Gifter, and Top Liker. Their HTTPS URLs can be added as Browser Sources in OBS or TikTok LIVE Studio."
     },
     {
       "category": "overlays",
       "question": "Must the desktop application stay open for overlays?",
-      "answer": "Yes for live publishing and local media. LiveFlow Studio must remain open, logged in, and online while local picture/GIF or video media is relayed. Realtime session content is not stored as permanent event history."
+      "answer": "Yes for live delivery and local media. LiveFlow Studio must remain open, logged in, and online while local picture/GIF or video media is displayed. Session activity is not stored as permanent event history."
     },
     {
       "category": "data",
       "question": "Where are settings, credentials, and media stored?",
-      "answer": "Account-scoped operational settings are stored in local SQLite. Supported integration secrets are stored in Windows Credential Manager. Audio, pictures, videos, and gift icons remain in the local media folder."
+      "answer": "Operational settings and supported integration credentials use protected storage on this device. Audio, pictures, videos, and gift icons remain in the local media folder."
     },
     {
       "category": "data",
@@ -259,7 +280,7 @@
     {
       "category": "updates",
       "question": "How are application updates verified?",
-      "answer": "LiveFlow Studio checks, downloads, and installs updates from the login screen without requiring a Supabase account. It only accepts assets from the official public release repository and verifies the Ed25519-signed manifest, anti-rollback sequence, download host, size, and SHA-256 before Windows is allowed to open the installer."
+      "answer": "LiveFlow Studio checks, downloads, and installs updates from the login screen without requiring an active account. It accepts files only from the official release source and verifies the trusted release information and file integrity before Windows is allowed to open the installer."
     },
     {
       "category": "updates",
