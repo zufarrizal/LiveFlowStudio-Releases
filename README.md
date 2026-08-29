@@ -1,6 +1,6 @@
 # LiveFlow Studio
 
-![Stable](https://img.shields.io/badge/Stable-1.4.1-22C55E)
+![Stable](https://img.shields.io/badge/Stable-1.4.2-22C55E)
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-1674CE?logo=windows11&logoColor=white)
 ![Architecture](https://img.shields.io/badge/Architecture-x64-38C8ED)
 
@@ -8,7 +8,7 @@ Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi stable Latest 1.4.1 membuat setiap Action effect dapat berjalan mandiri, mengizinkan device yang sama berpindah IP atau VPN tanpa reset, dan menyediakan pemeriksaan, download, serta pemasangan update langsung dari layar login. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher.
+Versi stable Latest 1.4.2 menyederhanakan bahasa production agar berfokus pada kebutuhan pengguna, menyaring detail teknis dari status dan pesan error yang terlihat, serta menampilkan versi aplikasi langsung pada halaman Support. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher.
 
 Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyertakan file audio, identitas akun, credential, identitas internal preset, data realtime, atau progress sesi. Ketika import, konfigurasi diterapkan ke preset tujuan yang aktif, referensi Action di-remap, audio MyInstants yang belum tersedia diunduh otomatis setelah preflight disetujui, dan aplikasi membuat backup sebelum konfigurasi diganti.
 
@@ -25,16 +25,17 @@ Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyerta
 - Gift catalog dapat diperbarui dari header dan otomatis diperbarui setelah import berhasil.
 - Test Action dan simulasi Specific Gift menggunakan delay lima detik dengan feedback countdown.
 - Test Action dapat menjalankan batch 1-100 kali. Gift Simulator mengirim satu combo 1-100 gift dengan jarak input acak 0,2-1,0 detik; pacing tambahan 0,5 detik dapat diatur secara global per preset.
-- Setiap effect dapat menjadi satu-satunya effect aktif; audio lokal diputar mandiri oleh player Windows backend dan Live Execution Log melakukan resync setelah jendela dipulihkan.
+- Setiap effect dapat menjadi satu-satunya effect aktif; audio lokal tetap berjalan mandiri dan Live Execution Log memulihkan status terbaru setelah jendela dipulihkan.
 - Editor Keystroke menyediakan notice dan tautan unduh AutoIt resmi.
+- ServerTap Key memakai default `change_me`, selalu terlihat, dan tetap terisi setelah pengaturan disimpan.
 - Goal Overlay dan pengaturannya tersimpan secara independen untuk setiap preset.
 - Pesan autentikasi dan diagnostik disanitasi agar URL internal, token, dan credential tidak tampil di UI.
-- Manifest Ed25519 dan high-water anti-rollback melindungi updater pada versi 1.3.0 dan sesudahnya.
-- Pemeriksaan, download, dan pemasangan update tersedia dari layar login tanpa memerlukan akun Supabase.
+- Informasi rilis bertanda tangan dan perlindungan rollback melindungi updater pada versi 1.3.0 dan sesudahnya.
+- Pemeriksaan, download, dan pemasangan update tersedia dari layar login tanpa memerlukan akun aktif.
 
 ## Unduh
 
-Buka [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest) atau [halaman versi 1.4.1](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.4.1), lalu pilih salah satu:
+Buka [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest) atau [halaman versi 1.4.2](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.4.2), lalu pilih salah satu:
 
 - `LiveFlowStudio-Setup-<version>-x64.exe` untuk instalasi normal.
 - `LiveFlowStudio-<version>-windows-x64.zip` untuk versi portable.
@@ -43,9 +44,9 @@ Paket release juga memuat:
 
 - `SHA256SUMS.txt` untuk memeriksa integritas file.
 - `release-manifest.json` yang mengikat metadata dan checksum installer/portable.
-- `release-manifest-signatures.json` untuk memverifikasi manifest menggunakan Ed25519.
+- `release-manifest-signatures.json` untuk memverifikasi tanda tangan informasi rilis.
 
-Installer dan portable ZIP 1.4.1 menyertakan dokumen versi berikut:
+Installer dan portable ZIP 1.4.2 menyertakan dokumen versi berikut:
 
 - `EULA.txt` — perjanjian lisensi pengguna akhir.
 - `PRIVACY.txt` — pemberitahuan pemrosesan dan penyimpanan data.
@@ -62,19 +63,18 @@ Installer dan portable ZIP 1.4.1 menyertakan dokumen versi berikut:
 Contoh verifikasi melalui PowerShell:
 
 ```powershell
-Get-FileHash .\LiveFlowStudio-Setup-1.4.1-x64.exe -Algorithm SHA256
+Get-FileHash .\LiveFlowStudio-Setup-1.4.2-x64.exe -Algorithm SHA256
 ```
 
 ## Pembaruan otomatis
 
-LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable Latest dari repository ini, memverifikasi signature Ed25519 manifest beserta checksum installer, lalu meminta persetujuan pengguna sebelum menjalankannya. Karena 1.4.1 adalah stable Latest, versi ini ditawarkan oleh pemeriksaan update otomatis; pada 1.4.1 pemeriksaan dan pemasangan tersedia langsung dari layar login.
+LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable Latest dari repository ini, memverifikasi tanda tangan informasi rilis beserta checksum installer, lalu meminta persetujuan pengguna sebelum menjalankannya. Karena 1.4.2 adalah stable Latest, versi ini ditawarkan oleh pemeriksaan update otomatis; pemeriksaan dan pemasangan tersedia langsung dari layar login.
 
-> **Upgrade pertama dari 1.2.1:** walaupun 1.3.0 tersedia sebagai Latest, verifier Ed25519 belum tersedia pada aplikasi lama dan paket belum memiliki Authenticode komersial. Unduh 1.3.0 secara manual dari halaman release resmi, cocokkan SHA-256 melalui kanal owner, tutup 1.2.1, lalu jalankan installer baru. Jangan mengandalkan tombol update otomatis 1.2.1 untuk mengautentikasi transisi bootstrap ini.
+> **Upgrade pertama dari 1.2.1:** walaupun 1.3.0 tersedia sebagai Latest, verifikasi rilis terbaru belum tersedia pada aplikasi lama dan paket belum memiliki tanda tangan komersial. Unduh 1.3.0 secara manual dari halaman release resmi, cocokkan SHA-256 melalui kanal owner, tutup 1.2.1, lalu jalankan installer baru. Jangan mengandalkan tombol update otomatis 1.2.1 untuk memverifikasi perpindahan pertama ini.
 
 ## Persyaratan
 
 - Windows 10 atau Windows 11 64-bit.
-- Microsoft Edge WebView2 Runtime.
 - Koneksi internet untuk login, TikTok LIVE, gift catalog, Shop, Saweria, Sound Library, dan cloud overlay.
 - Akun LiveFlow Studio yang masih aktif.
 - AutoIt yang sudah dipasang jika menggunakan Keystroke Action: [unduh dari situs resmi](https://www.autoitscript.com/site/autoit/downloads/).
@@ -84,8 +84,8 @@ LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable Latest dari repo
 - Repository ini hanya berisi binary release; source code proprietary tetap privat.
 - Jangan mengunduh installer dari mirror, pesan pribadi, atau domain yang tidak tercantum di sini.
 - Installer saat ini belum ditandatangani dengan sertifikat code-signing komersial. Windows dapat menampilkan `Unknown Publisher`; selalu periksa sumber file dan SHA-256 sebelum memasang.
-- `release-manifest.json` harus memiliki pasangan `release-manifest-signatures.json` yang valid. LiveFlow Studio 1.3.0 dan sesudahnya menolak release tanpa signature produksi yang dikenal.
-- Aplikasi Admin, Supabase secret, database password, dan credential deployment tidak pernah menjadi bagian dari paket pengguna.
+- `release-manifest.json` harus memiliki pasangan `release-manifest-signatures.json` yang valid. LiveFlow Studio 1.3.0 dan sesudahnya menolak release tanpa tanda tangan resmi yang dikenal.
+- Aplikasi Admin, credential layanan, dan konfigurasi deployment tidak pernah menjadi bagian dari paket pengguna.
 
 ## Bantuan
 
