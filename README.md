@@ -1,41 +1,39 @@
 # LiveFlow Studio
 
-![Stable](https://img.shields.io/badge/Stable-1.5.0-22C55E)
+![Stable](https://img.shields.io/badge/Stable-1.5.1-22C55E)
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-1674CE?logo=windows11&logoColor=white)
-![Architecture](https://img.shields.io/badge/Architecture-x64-38C8ED)
 
 Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi stable Latest 1.5.0 memakai satu sesi login aktif per akun dan Overlay ID 8 digit yang stabil untuk seluruh URL Browser Source. Login terbaru otomatis menggantikan sesi aplikasi serta publisher sebelumnya, sementara perubahan TikTok username tidak lagi mengubah URL overlay. Paket belum memiliki Authenticode komersial sehingga Windows dapat menampilkan peringatan publisher.
+Versi 1.5.1 adalah stable Latest yang menambahkan Repeat delay berbasis detik, menjaga sesi terverifikasi saat jaringan sementara terganggu, menghapus Shop, menyederhanakan tombol Save, dan meningkatkan tampilan LiveFlow Admin pada jendela kecil. Setiap akun tetap memakai satu sesi login aktif dan Overlay ID 8 digit yang stabil untuk seluruh URL Browser Source. Windows dapat menampilkan peringatan publisher karena paket belum memiliki sertifikat code-signing komersial.
 
 Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyertakan file audio, identitas akun, credential, identitas internal preset, data realtime, atau progress sesi. Ketika import, konfigurasi diterapkan ke preset tujuan yang aktif, referensi Action di-remap, audio MyInstants yang belum tersedia diunduh otomatis setelah preflight disetujui, dan aplikasi membuat backup sebelum konfigurasi diganti.
 
 ## Fitur utama
 
 - Watcher TikTok LIVE otomatis dengan Action untuk gift, follow, share, subscribe, dan komentar.
-- Satu email memiliki satu TikTok username aktif, satu Overlay ID 8 digit yang stabil, dan satu sesi login aktif; login terbaru otomatis menggantikan sesi aplikasi serta publisher sebelumnya.
+- Satu email memiliki satu TikTok username aktif, satu Overlay ID 8 digit yang stabil, dan satu sesi login aktif; login terbaru otomatis menggantikan sesi sebelumnya.
 - Integrasi Saweria, Minecraft, keystroke, audio lokal, media overlay, Goal, dan widget realtime.
-- Bridge Host Coins Counter lokal membagikan lifecycle room dan gift coin final tanpa membuat watcher TikTok kedua.
+- Host Coins Counter dapat menerima status sesi dan total gift coin dari aplikasi yang sama tanpa membuat koneksi TikTok kedua.
 - Event List Box dapat menyembunyikan box visual/caption atau caption teks per preset pada preview dan PNG.
-- Shop read-only untuk melihat produk Zal Digital; transaksi dan dukungan pelanggan tetap ditangani bot Telegram resmi.
 - Pengaturan durasi, status Action, dan efek aktif langsung dari tabel Actions.
 - Export/import konfigurasi JSON lintas akun dengan validasi, rollback, dan pemulihan audio MyInstants.
 - Gift catalog dapat diperbarui dari header dan otomatis diperbarui setelah import berhasil.
 - Test Action dan simulasi Specific Gift menggunakan delay lima detik dengan feedback countdown.
-- Test Action dapat menjalankan batch 1-100 kali. Gift Simulator mengirim satu combo 1-100 gift dengan jarak input acak 0,2-1,0 detik; pacing tambahan 0,5 detik dapat diatur secara global per preset.
+- Test Action dapat menjalankan batch 1-100 kali. Gift Simulator mengirim satu combo 1-100 gift dengan jarak input acak 0,2-1,0 detik; Repeat delay dapat diatur per preset dan bernilai awal 0,125 detik.
 - Setiap effect dapat menjadi satu-satunya effect aktif; audio lokal tetap berjalan mandiri dan Live Execution Log memulihkan status terbaru setelah jendela dipulihkan.
 - Editor Keystroke menyediakan notice dan tautan unduh AutoIt resmi.
 - ServerTap Key memakai default `change_me`, selalu terlihat, dan tetap terisi setelah pengaturan disimpan.
 - Goal Overlay dan pengaturannya tersimpan secara independen untuk setiap preset.
-- Pesan autentikasi dan diagnostik disanitasi agar URL internal, token, dan credential tidak tampil di UI.
-- Informasi rilis bertanda tangan dan perlindungan rollback melindungi updater pada versi 1.3.0 dan sesudahnya.
+- Pesan autentikasi dan diagnostik disaring agar informasi sensitif tidak tampil di UI.
+- Update hanya diterima dari kanal resmi dan diperiksa integritasnya sebelum dijalankan.
 - Pemeriksaan, download, dan pemasangan update tersedia dari layar login tanpa memerlukan akun aktif.
 
 ## Unduh
 
-Buka [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest) atau [halaman versi 1.5.0](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.5.0), lalu pilih salah satu:
+Buka [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest) atau [halaman versi 1.5.1](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.5.1), lalu pilih salah satu:
 
 - `LiveFlowStudio-Setup-<version>-x64.exe` untuk instalasi normal.
 - `LiveFlowStudio-<version>-windows-x64.zip` untuk versi portable.
@@ -46,11 +44,11 @@ Paket release juga memuat:
 - `release-manifest.json` yang mengikat metadata dan checksum installer/portable.
 - `release-manifest-signatures.json` untuk memverifikasi tanda tangan informasi rilis.
 
-Installer dan portable ZIP 1.5.0 menyertakan dokumen versi berikut:
+Installer dan portable ZIP 1.5.1 menyertakan dokumen versi berikut:
 
 - `EULA.txt` — perjanjian lisensi pengguna akhir.
 - `PRIVACY.txt` — pemberitahuan pemrosesan dan penyimpanan data.
-- `QUICK_START.txt` — panduan instalasi, setup, Shop, serta export/import.
+- `QUICK_START.txt` — panduan instalasi, setup, serta export/import.
 - `THIRD_PARTY_NOTICES.txt` — daftar komponen, runtime, dan lisensi pihak ketiga.
 
 ## Instalasi
@@ -63,19 +61,19 @@ Installer dan portable ZIP 1.5.0 menyertakan dokumen versi berikut:
 Contoh verifikasi melalui PowerShell:
 
 ```powershell
-Get-FileHash .\LiveFlowStudio-Setup-1.5.0-x64.exe -Algorithm SHA256
+Get-FileHash .\LiveFlowStudio-Setup-1.5.1-x64.exe -Algorithm SHA256
 ```
 
 ## Pembaruan otomatis
 
-LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable Latest dari repository ini, memverifikasi tanda tangan informasi rilis beserta checksum installer, lalu meminta persetujuan pengguna sebelum menjalankannya. Karena 1.5.0 adalah stable Latest, versi ini ditawarkan oleh pemeriksaan update otomatis; pemeriksaan dan pemasangan tersedia langsung dari layar login.
+LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable Latest dari repository ini, memverifikasi tanda tangan informasi rilis beserta checksum installer, lalu meminta persetujuan pengguna sebelum menjalankannya. Karena 1.5.1 adalah stable Latest, versi ini ditawarkan oleh pemeriksaan update otomatis; pemeriksaan dan pemasangan tersedia langsung dari layar login.
 
 > **Upgrade pertama dari 1.2.1:** walaupun 1.3.0 tersedia sebagai Latest, verifikasi rilis terbaru belum tersedia pada aplikasi lama dan paket belum memiliki tanda tangan komersial. Unduh 1.3.0 secara manual dari halaman release resmi, cocokkan SHA-256 melalui kanal owner, tutup 1.2.1, lalu jalankan installer baru. Jangan mengandalkan tombol update otomatis 1.2.1 untuk memverifikasi perpindahan pertama ini.
 
 ## Persyaratan
 
 - Windows 10 atau Windows 11 64-bit.
-- Koneksi internet untuk login, TikTok LIVE, gift catalog, Shop, Saweria, Sound Library, dan cloud overlay.
+- Koneksi internet untuk login, TikTok LIVE, gift catalog, Saweria, Sound Library, dan overlay online.
 - Akun LiveFlow Studio yang masih aktif.
 - AutoIt yang sudah dipasang jika menggunakan Keystroke Action: [unduh dari situs resmi](https://www.autoitscript.com/site/autoit/downloads/).
 
@@ -89,6 +87,6 @@ LiveFlow Studio 1.3.0 dan sesudahnya hanya menerima aset stable Latest dari repo
 
 ## Bantuan
 
-Untuk bantuan produk dan transaksi Shop, hubungi [bot Telegram Zal Digital](https://t.me/ZalDigitalBot). Informasi pengembang tersedia melalui [GitHub Zufar Rizal](https://github.com/zufarrizal). Dukungan sukarela untuk pengembangan dapat diberikan melalui [Saweria](https://saweria.co/ZufarRizal).
+Informasi pengembang tersedia melalui [GitHub Zufar Rizal](https://github.com/zufarrizal). Dukungan sukarela untuk pengembangan dapat diberikan melalui [Saweria](https://saweria.co/ZufarRizal).
 
 Copyright © 2026 Zufar Rizal. All rights reserved.
