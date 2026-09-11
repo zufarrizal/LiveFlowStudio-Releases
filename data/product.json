@@ -1,14 +1,35 @@
 {
   "schemaVersion": 1,
-  "reviewedForVersion": "1.5.0",
-  "reviewedAt": "2026-09-09",
+  "reviewedForVersion": "1.5.1",
+  "reviewedAt": "2026-09-11",
   "releaseCopy": {
+    "1.5.1": {
+      "summary": "This release adds adjustable Repeat delay, removes the in-app Shop, simplifies Save buttons, improves compact Admin layouts, and keeps one verified session active through temporary reconnects.",
+      "highlights": [
+        {
+          "title": "Connection-safe session handling",
+          "description": "A reconnect from the same application runtime no longer looks like a second login, and temporary network failures retain the verified session."
+        },
+        {
+          "title": "Adjustable Repeat delay",
+          "description": "Repeat Gift Combo pacing is configured in seconds per preset with a 0.125-second default and is preserved by configuration export and import."
+        },
+        {
+          "title": "Cleaner application surface",
+          "description": "The Shop module is removed and Save buttons use text without save icons."
+        },
+        {
+          "title": "Responsive Admin workspace",
+          "description": "Account management remains usable down to a 360-pixel window without horizontal clipping."
+        }
+      ]
+    },
     "1.5.0": {
       "summary": "This release enforces one active login per account and gives every account a stable eight-digit Overlay ID for all Browser Source URLs.",
       "highlights": [
         {
           "title": "One active account session",
-          "description": "A newer login immediately replaces the previous application session and cloud-overlay publisher for that account."
+          "description": "A newer login immediately replaces the previous active application session for that account."
         },
         {
           "title": "Stable Overlay ID",
@@ -217,7 +238,7 @@
     {
       "category": "getting-started",
       "question": "Can I use the application without an active account?",
-      "answer": "Production features are invite-only, but trusted application updates remain available from the login screen. The account must be active, claimed by its approved installation, and have a unique TikTok username before LiveFlow Studio can start its production services. Public-IP or VPN changes on the same verified installation do not require a reset."
+      "answer": "Production features are invite-only, but trusted application updates remain available from the login screen. The account must be active and have a unique TikTok username before LiveFlow Studio can start its production services."
     },
     {
       "category": "getting-started",
@@ -303,11 +324,6 @@
       "category": "updates",
       "question": "Why can Windows show Unknown Publisher or SmartScreen?",
       "answer": "The current installer is not commercially code-signed. Download only from the official release repository and compare the published SHA-256 value before running the package."
-    },
-    {
-      "category": "updates",
-      "question": "Does the in-app Shop process payment or deliver products?",
-      "answer": "No. Shop is a read-only Zal Digital catalog. Product checkout, payment, delivery, and Store Support continue through the official Telegram bot. LiveFlow Studio does not store transaction data."
     }
   ]
 }
