@@ -1,13 +1,13 @@
 # LiveFlow Studio
 
-![Stable](https://img.shields.io/badge/Stable-1.5.1-22C55E)
+![Stable](https://img.shields.io/badge/Stable-1.5.2-22C55E)
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-1674CE?logo=windows11&logoColor=white)
 
 Kanal resmi installer dan pembaruan LiveFlow Studio untuk Windows.
 
 LiveFlow Studio menghubungkan aktivitas TikTok LIVE dan Saweria dengan Action interaktif seperti Minecraft command, keystroke, audio lokal, Goal, serta overlay untuk OBS dan TikTok LIVE Studio.
 
-Versi 1.5.1 adalah stable Latest yang menambahkan Repeat delay berbasis detik, menjaga sesi terverifikasi saat jaringan sementara terganggu, menghapus Shop, menyederhanakan tombol Save, dan meningkatkan tampilan LiveFlow Admin pada jendela kecil. Setiap akun tetap memakai satu sesi login aktif dan Overlay ID 8 digit yang stabil untuk seluruh URL Browser Source. Windows dapat menampilkan peringatan publisher karena paket belum memiliki sertifikat code-signing komersial.
+Versi 1.5.2 adalah stable Latest yang memperbarui dependensi Go, toolchain Go, serta paket frontend untuk menutup kerentanan keamanan sambil mempertahankan seluruh fitur 1.5.1. Setiap akun tetap memakai satu sesi login aktif dan Overlay ID 8 digit yang stabil untuk seluruh URL Browser Source. Windows dapat menampilkan peringatan publisher karena paket belum memiliki sertifikat code-signing komersial.
 
 Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyertakan file audio, identitas akun, credential, identitas internal preset, data realtime, atau progress sesi. Ketika import, konfigurasi diterapkan ke preset tujuan yang aktif, referensi Action di-remap, audio MyInstants yang belum tersedia diunduh otomatis setelah preflight disetujui, dan aplikasi membuat backup sebelum konfigurasi diganti.
 
@@ -33,7 +33,7 @@ Export konfigurasi tetap berupa satu file JSON untuk preset aktif tanpa menyerta
 
 ## Unduh
 
-Buka [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest) atau [halaman versi 1.5.1](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.5.1), lalu pilih salah satu:
+Buka [stable Latest](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/latest) atau [halaman versi 1.5.2](https://github.com/zufarrizal/LiveFlowStudio-Releases/releases/tag/v1.5.2), lalu pilih salah satu:
 
 - `LiveFlowStudio-Setup-<version>-x64.exe` untuk instalasi normal.
 - `LiveFlowStudio-<version>-windows-x64.zip` untuk versi portable.
@@ -44,7 +44,7 @@ Paket release juga memuat:
 - `release-manifest.json` yang mengikat metadata dan checksum installer/portable.
 - `release-manifest-signatures.json` untuk memverifikasi tanda tangan informasi rilis.
 
-Installer dan portable ZIP 1.5.1 menyertakan dokumen versi berikut:
+Installer dan portable ZIP 1.5.2 menyertakan dokumen versi berikut:
 
 - `EULA.txt` — perjanjian lisensi pengguna akhir.
 - `PRIVACY.txt` — pemberitahuan pemrosesan dan penyimpanan data.
